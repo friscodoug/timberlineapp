@@ -378,7 +378,7 @@ export default function CabinModeScreen() {
 
         {/* Fun Things To Do */}
         <View style={styles.card}>
-          <Text style={styles.sectionTitle}>Fun Things To Do</Text>
+          <Text style={styles.sectionTitle}>Fun Things To Do Without Technology</Text>
           <Text style={styles.activitiesSubtext}>Activities organized by time</Text>
           
           {FUN_ACTIVITIES.map((category, index) => (
