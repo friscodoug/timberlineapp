@@ -11,6 +11,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Alert,
+  Vibration,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -126,6 +127,9 @@ interface JournalEntry {
 
 const JOURNAL_STORAGE_KEY = 'cabin_journal_entries';
 
+// Alarm sound URL - gentle chime/bell sound
+const ALARM_SOUND_URL = 'https://soundbible.com/mp3/Ship_Bell-Mike_Koenig-1911209136.mp3';
+
 export default function CabinModeScreen() {
   const router = useRouter();
   const [activeSound, setActiveSound] = useState<string | null>(null);
@@ -137,15 +141,26 @@ export default function CabinModeScreen() {
   const [journalContent, setJournalContent] = useState('');
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
   const [expandedCategory, setExpandedCategory] = useState<number | null>(null);
+  const [timerComplete, setTimerComplete] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const alarmRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     loadJournalEntries();
+    // Preload alarm sound
+    if (Platform.OS === 'web') {
+      alarmRef.current = new Audio(ALARM_SOUND_URL);
+      alarmRef.current.volume = 0.8;
+    }
     return () => {
       // Cleanup audio on unmount
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current = null;
+      }
+      if (alarmRef.current) {
+        alarmRef.current.pause();
+        alarmRef.current = null;
       }
     };
   }, []);
@@ -156,7 +171,10 @@ export default function CabinModeScreen() {
       interval = setInterval(() => {
         setTimeLeft((prev) => {
           if (prev <= 1) {
+            // Timer complete - play alarm
+            playAlarm();
             setTimerMinutes(null);
+            setTimerComplete(true);
             return 0;
           }
           return prev - 1;
@@ -165,6 +183,26 @@ export default function CabinModeScreen() {
     }
     return () => clearInterval(interval);
   }, [timeLeft]);
+
+  const playAlarm = () => {
+    // Vibrate on mobile devices
+    if (Platform.OS !== 'web') {
+      Vibration.vibrate([500, 500, 500, 500, 500]);
+    }
+    
+    // Play alarm sound on web
+    if (Platform.OS === 'web' && alarmRef.current) {
+      alarmRef.current.currentTime = 0;
+      alarmRef.current.play().catch(e => console.log('Alarm play error:', e));
+    }
+    
+    // Show alert
+    Alert.alert(
+      'Session Complete!',
+      'Your digital detox session has ended. How do you feel?',
+      [{ text: 'Great!', onPress: () => setTimerComplete(false) }]
+    );
+  };
 
   const loadJournalEntries = async () => {
     try {
@@ -239,7 +277,6 @@ export default function CabinModeScreen() {
         }
       } else {
         // For native, just show visual state
-        // Note: Native audio would require expo-audio setup
         setActiveSound(soundId);
       }
     }
@@ -248,11 +285,13 @@ export default function CabinModeScreen() {
   const startTimer = (minutes: number) => {
     setTimerMinutes(minutes);
     setTimeLeft(minutes * 60);
+    setTimerComplete(false);
   };
 
   const stopTimer = () => {
     setTimerMinutes(null);
     setTimeLeft(0);
+    setTimerComplete(false);
   };
 
   const formatTime = (seconds: number) => {
@@ -356,6 +395,10 @@ export default function CabinModeScreen() {
             <View style={styles.timerActive}>
               <Text style={styles.timerDisplay}>{formatTime(timeLeft)}</Text>
               <Text style={styles.timerLabel}>Unplug and reconnect with nature</Text>
+              <View style={styles.alarmNotice}>
+                <Ionicons name="notifications-outline" size={16} color={COLORS.secondary} />
+                <Text style={styles.alarmNoticeText}>An alarm will sound when the session is complete</Text>
+              </View>
               <TouchableOpacity style={styles.stopButton} onPress={stopTimer}>
                 <Ionicons name="stop" size={18} color={COLORS.white} />
                 <Text style={styles.stopButtonText}>End Session</Text>
@@ -632,7 +675,22 @@ const styles = StyleSheet.create({
     fontSize: FONTS.sizes.md,
     color: COLORS.text,
     marginTop: SPACING.sm,
+    marginBottom: SPACING.sm,
+  },
+  alarmNotice: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SPACING.xs,
+    backgroundColor: COLORS.background,
+    paddingVertical: SPACING.sm,
+    paddingHorizontal: SPACING.md,
+    borderRadius: 8,
     marginBottom: SPACING.lg,
+  },
+  alarmNoticeText: {
+    fontSize: FONTS.sizes.sm,
+    color: COLORS.secondary,
+    fontStyle: 'italic',
   },
   stopButton: {
     flexDirection: 'row',

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -6,11 +6,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   ScrollView,
-  TextInput,
   Linking,
-  KeyboardAvoidingView,
-  Platform,
-  Alert,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { COLORS, FONTS, SPACING, CARD_STYLE } from '../src/constants/theme';
@@ -26,88 +22,49 @@ const BENEFITS = [
 
 export default function NewsletterScreen() {
   const router = useRouter();
-  const [firstName, setFirstName] = useState('');
-  const [email, setEmail] = useState('');
 
   const handleSubscribe = () => {
-    if (!firstName.trim() || !email.trim()) {
-      Alert.alert('Missing Information', 'Please enter your name and email.');
-      return;
-    }
-    // Open Mailchimp signup with pre-filled data
     Linking.openURL(CONTACT.mailchimpUrl);
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.keyboardView}
-      >
-        <ScrollView contentContainerStyle={styles.scrollContent}>
-          <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-            <Ionicons name="arrow-back" size={24} color={COLORS.primary} />
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+          <Ionicons name="arrow-back" size={24} color={COLORS.primary} />
+        </TouchableOpacity>
+
+        <View style={styles.header}>
+          <Ionicons name="mail" size={48} color={COLORS.primary} />
+          <Text style={styles.headline}>Unlock Cabin Deals</Text>
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.description}>Join our Pine Post newsletter for:</Text>
+
+          <View style={styles.benefitsList}>
+            {BENEFITS.map((benefit, index) => (
+              <View key={index} style={styles.benefitItem}>
+                <Ionicons name="leaf" size={18} color={COLORS.primary} />
+                <Text style={styles.benefitText}>{benefit}</Text>
+              </View>
+            ))}
+          </View>
+
+          <TouchableOpacity
+            style={styles.button}
+            onPress={handleSubscribe}
+            activeOpacity={0.8}
+          >
+            <Ionicons name="paper-plane" size={20} color={COLORS.white} />
+            <Text style={styles.buttonText}>Join the Pine Post</Text>
           </TouchableOpacity>
 
-          <View style={styles.header}>
-            <Ionicons name="mail" size={48} color={COLORS.primary} />
-            <Text style={styles.headline}>Unlock Cabin Deals</Text>
-          </View>
-
-          <View style={styles.card}>
-            <Text style={styles.description}>Join our Pine Post newsletter for:</Text>
-
-            <View style={styles.benefitsList}>
-              {BENEFITS.map((benefit, index) => (
-                <View key={index} style={styles.benefitItem}>
-                  <Ionicons name="leaf" size={18} color={COLORS.primary} />
-                  <Text style={styles.benefitText}>{benefit}</Text>
-                </View>
-              ))}
-            </View>
-
-            <View style={styles.form}>
-              <View style={styles.inputGroup}>
-                <Text style={styles.label}>First Name</Text>
-                <TextInput
-                  style={styles.input}
-                  value={firstName}
-                  onChangeText={setFirstName}
-                  placeholder="Your first name"
-                  placeholderTextColor={COLORS.lightGray}
-                  autoCapitalize="words"
-                />
-              </View>
-
-              <View style={styles.inputGroup}>
-                <Text style={styles.label}>Email</Text>
-                <TextInput
-                  style={styles.input}
-                  value={email}
-                  onChangeText={setEmail}
-                  placeholder="your@email.com"
-                  placeholderTextColor={COLORS.lightGray}
-                  keyboardType="email-address"
-                  autoCapitalize="none"
-                />
-              </View>
-
-              <TouchableOpacity
-                style={styles.button}
-                onPress={handleSubscribe}
-                activeOpacity={0.8}
-              >
-                <Ionicons name="paper-plane" size={20} color={COLORS.white} />
-                <Text style={styles.buttonText}>Join the Pine Post</Text>
-              </TouchableOpacity>
-            </View>
-
-            <Text style={styles.privacy}>
-              We respect your inbox. Unsubscribe anytime.
-            </Text>
-          </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
+          <Text style={styles.privacy}>
+            We respect your inbox. Unsubscribe anytime.
+          </Text>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -116,9 +73,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.background,
-  },
-  keyboardView: {
-    flex: 1,
   },
   scrollContent: {
     padding: SPACING.lg,
@@ -149,7 +103,7 @@ const styles = StyleSheet.create({
   },
   benefitsList: {
     gap: SPACING.sm,
-    marginBottom: SPACING.lg,
+    marginBottom: SPACING.xl,
     paddingLeft: SPACING.sm,
   },
   benefitItem: {
@@ -161,27 +115,6 @@ const styles = StyleSheet.create({
     fontSize: FONTS.sizes.md,
     color: COLORS.text,
   },
-  form: {
-    gap: SPACING.md,
-  },
-  inputGroup: {
-    gap: SPACING.xs,
-  },
-  label: {
-    fontSize: FONTS.sizes.sm,
-    fontWeight: FONTS.weights.medium,
-    color: COLORS.text,
-  },
-  input: {
-    backgroundColor: COLORS.background,
-    borderRadius: 10,
-    paddingHorizontal: SPACING.md,
-    paddingVertical: SPACING.md,
-    fontSize: FONTS.sizes.md,
-    color: COLORS.text,
-    borderWidth: 1,
-    borderColor: COLORS.lightGray,
-  },
   button: {
     backgroundColor: COLORS.primary,
     flexDirection: 'row',
@@ -190,7 +123,6 @@ const styles = StyleSheet.create({
     gap: SPACING.sm,
     paddingVertical: SPACING.md,
     borderRadius: 12,
-    marginTop: SPACING.sm,
   },
   buttonText: {
     color: COLORS.white,
