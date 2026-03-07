@@ -1,0 +1,49 @@
+{
+  "expo": {
+    "name": "Hibernation Hollow Guest Portal",
+    "slug": "hibernation-hollow-guest-portal",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "hibernation-hollow",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.hibernationhollow.guestportal"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#2F4F3E"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "com.hibernationhollow.guestportal"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png",
+      "name": "Hibernation Hollow Guest Portal",
+      "shortName": "Hollow Portal",
+      "description": "Digital guest portal for Hibernation Hollow Cabins in Broken Bow / Hochatown, Oklahoma",
+      "backgroundColor": "#F5F3EF",
+      "themeColor": "#2F4F3E"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#2F4F3E"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
