@@ -36,8 +36,8 @@ export const LOGO_URL = 'https://customer-assets.emergentagent.com/job_9548fa8e-
 export const CONTACT = {
   phone: '214-430-3956',
   email: 'doug@hibernationhollowcabins.com',
-  instagram: 'https://instagram.com/hibernationhollow',
-  facebook: 'https://facebook.com/hibernationhollow',
+  instagram: 'https://www.instagram.com/hibernationhollowcabins/',
+  facebook: 'https://www.facebook.com/hibernationhollowcabins/',
   website: 'https://www.hibernationhollowcabins.com',
   mailchimpUrl: 'https://mailchi.mp/hibernationhollowcabins/5lrqskfq6o',
 };
