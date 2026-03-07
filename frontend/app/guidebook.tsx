@@ -6,9 +6,9 @@ import {
   TouchableOpacity,
   SafeAreaView,
   ScrollView,
-  Linking,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import * as WebBrowser from 'expo-web-browser';
 import { COLORS, FONTS, SPACING, CARD_STYLE } from '../src/constants/theme';
 import { useCabin } from '../src/context/CabinContext';
 import { Ionicons } from '@expo/vector-icons';
@@ -31,9 +31,9 @@ export default function GuidebookScreen() {
   const router = useRouter();
   const { selectedCabin } = useCabin();
 
-  const openGuidebook = () => {
+  const openGuidebook = async () => {
     if (selectedCabin?.guidebookUrl) {
-      Linking.openURL(selectedCabin.guidebookUrl);
+      await WebBrowser.openBrowserAsync(selectedCabin.guidebookUrl);
     }
   };
 
