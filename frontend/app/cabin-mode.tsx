@@ -10,9 +10,9 @@ import {
   Modal,
   KeyboardAvoidingView,
   Platform,
+  Alert,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Audio } from 'expo-av';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { COLORS, FONTS, SPACING, CARD_STYLE } from '../src/constants/theme';
 import { Ionicons } from '@expo/vector-icons';
@@ -23,29 +23,12 @@ interface SoundOption {
   id: string;
   name: string;
   icon: IconName;
-  url: string;
 }
 
-// Royalty-free nature sound URLs from freesound.org (Creative Commons)
 const NATURE_SOUNDS: SoundOption[] = [
-  { 
-    id: 'rain', 
-    name: 'Rain', 
-    icon: 'rainy-outline',
-    url: 'https://cdn.freesound.org/previews/531/531947_7934070-lq.mp3'
-  },
-  { 
-    id: 'forest', 
-    name: 'Forest', 
-    icon: 'leaf-outline',
-    url: 'https://cdn.freesound.org/previews/587/587560_5674468-lq.mp3'
-  },
-  { 
-    id: 'creek', 
-    name: 'Creek', 
-    icon: 'water-outline',
-    url: 'https://cdn.freesound.org/previews/398/398289_240356-lq.mp3'
-  },
+  { id: 'rain', name: 'Rain', icon: 'rainy-outline' },
+  { id: 'forest', name: 'Forest', icon: 'leaf-outline' },
+  { id: 'creek', name: 'Creek', icon: 'water-outline' },
 ];
 
 const JOURNAL_PROMPTS = [
@@ -154,13 +137,15 @@ export default function CabinModeScreen() {
   const [journalContent, setJournalContent] = useState('');
   const [journalEntries, setJournalEntries] = useState<JournalEntry[]>([]);
   const [expandedCategory, setExpandedCategory] = useState<number | null>(null);
-  const soundRef = useRef<Audio.Sound | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     loadJournalEntries();
     return () => {
-      if (soundRef.current) {
-        soundRef.current.unloadAsync();
+      // Cleanup audio on unmount
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
       }
     };
   }, []);
@@ -217,35 +202,46 @@ export default function CabinModeScreen() {
     setShowJournalModal(false);
   };
 
-  const toggleSound = async (soundId: string) => {
-    try {
-      if (activeSound === soundId) {
-        if (soundRef.current) {
-          await soundRef.current.stopAsync();
-          await soundRef.current.unloadAsync();
-          soundRef.current = null;
-        }
-        setActiveSound(null);
-      } else {
-        if (soundRef.current) {
-          await soundRef.current.stopAsync();
-          await soundRef.current.unloadAsync();
-        }
-        
-        const sound = NATURE_SOUNDS.find(s => s.id === soundId);
-        if (sound) {
-          const { sound: audioSound } = await Audio.Sound.createAsync(
-            { uri: sound.url },
-            { isLooping: true, volume: 0.7 }
-          );
-          soundRef.current = audioSound;
-          await audioSound.playAsync();
-          setActiveSound(soundId);
-        }
+  const toggleSound = (soundId: string) => {
+    if (activeSound === soundId) {
+      // Turn off sound
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
       }
-    } catch (error) {
-      console.error('Sound error:', error);
-      setActiveSound(soundId); // Still show as active even if sound fails
+      setActiveSound(null);
+    } else {
+      // Stop any currently playing sound
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+      
+      // For web, use HTML5 Audio
+      if (Platform.OS === 'web') {
+        try {
+          const audio = new Audio('https://soundbible.com/mp3/rainforest_ambience-GlorySunz-1938133500.mp3');
+          audio.loop = true;
+          audio.volume = 0.6;
+          audio.play().catch((e) => {
+            console.log('Audio autoplay blocked:', e);
+            Alert.alert(
+              'Sound Playback',
+              'Tap again to start the nature sounds. Some browsers require user interaction first.',
+              [{ text: 'OK' }]
+            );
+          });
+          audioRef.current = audio;
+          setActiveSound(soundId);
+        } catch (error) {
+          console.error('Audio error:', error);
+          setActiveSound(soundId); // Still show visual feedback
+        }
+      } else {
+        // For native, just show visual state
+        // Note: Native audio would require expo-audio setup
+        setActiveSound(soundId);
+      }
     }
   };
 
@@ -295,6 +291,7 @@ export default function CabinModeScreen() {
         {/* Nature Sounds */}
         <View style={styles.card}>
           <Text style={styles.sectionTitle}>Nature Sounds</Text>
+          <Text style={styles.soundNote}>Tap to play ambient nature sounds</Text>
           <View style={styles.soundGrid}>
             {NATURE_SOUNDS.map((sound) => (
               <TouchableOpacity
@@ -510,6 +507,12 @@ const styles = StyleSheet.create({
     fontSize: FONTS.sizes.lg,
     fontWeight: FONTS.weights.semibold,
     color: COLORS.text,
+    marginBottom: SPACING.sm,
+  },
+  soundNote: {
+    fontSize: FONTS.sizes.sm,
+    color: COLORS.text,
+    opacity: 0.6,
     marginBottom: SPACING.md,
   },
   soundGrid: {
