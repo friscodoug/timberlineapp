@@ -1,0 +1,71 @@
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Cabin, CABINS } from '../constants/cabins';
+
+interface CabinContextType {
+  selectedCabin: Cabin | null;
+  selectCabin: (cabin: Cabin) => Promise<void>;
+  clearCabin: () => Promise<void>;
+  isLoading: boolean;
+}
+
+const CabinContext = createContext<CabinContextType | undefined>(undefined);
+
+const STORAGE_KEY = 'selectedCabin';
+
+export function CabinProvider({ children }: { children: ReactNode }) {
+  const [selectedCabin, setSelectedCabin] = useState<Cabin | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    loadSavedCabin();
+  }, []);
+
+  const loadSavedCabin = async () => {
+    try {
+      const savedCabinId = await AsyncStorage.getItem(STORAGE_KEY);
+      if (savedCabinId) {
+        const cabin = CABINS.find(c => c.id === savedCabinId);
+        if (cabin) {
+          setSelectedCabin(cabin);
+        }
+      }
+    } catch (error) {
+      console.error('Error loading saved cabin:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const selectCabin = async (cabin: Cabin) => {
+    try {
+      await AsyncStorage.setItem(STORAGE_KEY, cabin.id);
+      setSelectedCabin(cabin);
+    } catch (error) {
+      console.error('Error saving cabin:', error);
+    }
+  };
+
+  const clearCabin = async () => {
+    try {
+      await AsyncStorage.removeItem(STORAGE_KEY);
+      setSelectedCabin(null);
+    } catch (error) {
+      console.error('Error clearing cabin:', error);
+    }
+  };
+
+  return (
+    <CabinContext.Provider value={{ selectedCabin, selectCabin, clearCabin, isLoading }}>
+      {children}
+    </CabinContext.Provider>
+  );
+}
+
+export function useCabin() {
+  const context = useContext(CabinContext);
+  if (context === undefined) {
+    throw new Error('useCabin must be used within a CabinProvider');
+  }
+  return context;
+}

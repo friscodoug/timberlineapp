@@ -1,0 +1,84 @@
+.dashboard-header {
+  margin-bottom: 16px;
+}
+
+.welcome-text {
+  font-size: 16px;
+  color: #2B2B2B;
+  opacity: 0.7;
+}
+
+.cabin-name-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2F4F3E;
+  margin-bottom: 4px;
+}
+
+.change-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  font-size: 14px;
+  color: #2F4F3E;
+}
+
+.banner-card {
+  padding: 0 !important;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.banner-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.menu-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.menu-item:hover {
+  transform: translateX(4px);
+}
+
+.icon-container {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.menu-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2B2B2B;
+}
+
+.menu-subtitle {
+  font-size: 14px;
+  color: #2B2B2B;
+  opacity: 0.6;
+  margin-top: 2px;
+}
