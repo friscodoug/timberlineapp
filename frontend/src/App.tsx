@@ -10,6 +10,7 @@ import ComeBack from './pages/ComeBack';
 import Newsletter from './pages/Newsletter';
 import Connect from './pages/Connect';
 import Help from './pages/Help';
+import Weather from './pages/Weather';
 import './index.css';
 
 export default function App() {
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/newsletter" element={<Newsletter />} />
           <Route path="/connect" element={<Connect />} />
           <Route path="/help" element={<Help />} />
+          <Route path="/weather" element={<Weather />} />
         </Routes>
       </BrowserRouter>
     </CabinProvider>

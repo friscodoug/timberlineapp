@@ -1,0 +1,152 @@
+.weather-card {
+  padding: 0 !important;
+  overflow: hidden;
+  min-height: 280px;
+}
+
+.weather-card .weatherwidget-io {
+  display: block;
+  width: 100%;
+}
+
+.loading-state,
+.error-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: #64748b;
+  font-size: 16px;
+}
+
+.current-weather-card {
+  text-align: center;
+  padding: 24px 16px !important;
+}
+
+.current-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.current-temp {
+  font-size: 48px;
+  font-weight: 700;
+  color: #2F4F3E;
+}
+
+.current-condition {
+  font-size: 18px;
+  color: #64748b;
+  margin-bottom: 16px;
+}
+
+.current-details {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #4a5568;
+}
+
+.forecast-card {
+  margin-top: 16px;
+}
+
+.forecast-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2F4F3E;
+  margin-bottom: 16px;
+}
+
+.forecast-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.forecast-day {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  gap: 12px;
+}
+
+.day-name {
+  width: 60px;
+  font-weight: 600;
+  color: #2F4F3E;
+  font-size: 14px;
+}
+
+.day-temps {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.temp-high {
+  font-weight: 600;
+  color: #2F4F3E;
+}
+
+.temp-low {
+  color: #94a3b8;
+}
+
+.precipitation {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #64748b;
+  min-width: 40px;
+}
+
+.tips-card {
+  margin-top: 16px;
+}
+
+.tips-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2F4F3E;
+  margin-bottom: 16px;
+}
+
+.tip-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.tip-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.tip-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.tip-item p {
+  font-size: 14px;
+  color: #4a5568;
+  line-height: 1.5;
+  margin: 0;
+}

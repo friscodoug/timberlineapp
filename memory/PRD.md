@@ -19,8 +19,9 @@ A mobile-first Progressive Web App (PWA) serving as a digital guest portal for H
 |------|--------|----------|
 | Welcome | ✅ | Logo, headline, Continue button |
 | Cabin Selection | ✅ | 3 cabins with images (Honeydome, Bear Hug, Little Bear Tinyhouse), localStorage persistence |
-| Dashboard | ✅ | Welcome banner with cabin image, 6 menu tiles with subtitles, Change cabin option |
+| Dashboard | ✅ | Welcome banner with cabin image, 7 menu tiles with subtitles, Change cabin option |
 | Digital Guidebook | ✅ | Links to external Hostfully guidebook per cabin |
+| **Weather** | ✅ | **NEW** - Live 5-day forecast from Open-Meteo API, current conditions, weather tips |
 | Cabin Mode | ✅ | Nature sounds (Rain, Forest, Creek), journal prompts with modal, digital detox timer (30min/1hr/2hr/4hr) with alarm, activities accordion |
 | Come Back & Save | ✅ | HOLLOW10 discount code, booking link |
 | Join the Pine Post | ✅ | Link to Mailchimp newsletter signup |
@@ -36,6 +37,7 @@ A mobile-first Progressive Web App (PWA) serving as a digital guest portal for H
 - **Frontend**: React + Vite + Tailwind CSS (migrated from Expo)
 - **Routing**: react-router-dom
 - **State**: React Context API + localStorage
+- **Weather API**: Open-Meteo (free, no API key required)
 - **Backend**: FastAPI (available but currently unused)
 
 ## External Links & Integrations
@@ -44,6 +46,7 @@ A mobile-first Progressive Web App (PWA) serving as a digital guest portal for H
 - Instagram: instagram.com/hibernationhollowcabins/
 - Facebook: facebook.com/hibernationhollowcabins/
 - Booking: hibernationhollowcabins.com
+- **Weather Data**: api.open-meteo.com (Hochatown, OK coords: 34.17, -94.76)
 
 ## Data Structure
 ```typescript
@@ -64,9 +67,9 @@ The app is built as a standard React + Vite web application, ready for deploymen
 - GitHub Pages
 
 To deploy:
-1. Push code to GitHub
+1. Push code to GitHub using "Save to GitHub" feature
 2. Connect repository to Vercel/Netlify
-3. Set build command: `npm run build` or `yarn build`
+3. Set build command: `yarn build`
 4. Set output directory: `dist`
 
 ## Future Enhancements (Backlog)
@@ -79,3 +82,4 @@ To deploy:
 - **Dec 2025**: Multiple iterations based on user feedback (cabin photos, cabin mode features, social links)
 - **Dec 2025**: Full rebuild to React + Vite + Tailwind CSS for easier third-party deployment
 - **Mar 2026**: Final verification and testing - all features confirmed working
+- **Mar 2026**: Added Weather page with live 5-day forecast using Open-Meteo API
