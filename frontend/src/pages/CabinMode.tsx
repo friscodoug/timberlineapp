@@ -9,7 +9,7 @@ import './CabinMode.css';
 const SOUND_URLS: { [key: string]: string } = {
   rain: 'https://cdn.pixabay.com/audio/2022/05/13/audio_257112ce99.mp3',
   forest: 'https://cdn.pixabay.com/audio/2022/03/10/audio_4dedf5bf94.mp3',
-  creek: 'https://cdn.pixabay.com/audio/2022/08/02/audio_54ca0ffa52.mp3',
+  creek: 'https://bigsoundbank.com/UPLOAD/mp3/0949.mp3',
 };
 
 const NATURE_SOUNDS = [
