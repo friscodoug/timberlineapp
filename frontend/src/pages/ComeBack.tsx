@@ -18,7 +18,7 @@ export default function ComeBack() {
       <div className="header-center">
         <Heart size={48} color={COLORS.secondary} />
         <h1 className="page-title center">Love your stay?</h1>
-        <p className="subheadline">Come back to the Hollow.</p>
+        <p className="subheadline">Come back to Pine Acres.</p>
       </div>
 
       <Card>
@@ -29,7 +29,7 @@ export default function ComeBack() {
         <div className="code-container">
           <p className="code-label">Your Discount Code</p>
           <div className="code-box">
-            <span className="code-text">HOLLOW10</span>
+            <span className="code-text">PINEACRES10</span>
           </div>
           <p className="code-hint">Use at checkout for 10% off</p>
         </div>

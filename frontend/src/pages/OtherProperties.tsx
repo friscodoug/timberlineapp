@@ -8,11 +8,11 @@ import './OtherProperties.css';
 const PROPERTIES = [
   {
     id: '1',
-    name: 'Pine Acres Glamping',
-    location: 'Broken Bow, Oklahoma',
-    description: 'Unique glamping experiences including geodesic domes and tiny houses.',
-    url: 'https://www.pineacresglamping.com',
-    image: 'https://customer-assets.emergentagent.com/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/hqp3ck81_IMG_3278.JPG',
+    name: 'Hibernation Hollow Cabins',
+    location: 'Broken Bow / Hochatown, Oklahoma',
+    description: 'Cozy cabin rentals including the Honeydome, Bear Hug, and Little Bear Tinyhouse.',
+    url: 'https://www.hibernationhollowcabins.com',
+    image: 'https://customer-assets.emergentagent.com/job_9548fa8e-ba19-4435-b9f5-e400e160c6c7/artifacts/7yjce6m0_Dome%20Cover%20final.jpg',
   },
 ];
 
@@ -56,7 +56,7 @@ export default function OtherProperties() {
       <Card className="info-card">
         <p className="info-text">
           All properties are owned and operated by Douglas Rice, ensuring the same quality 
-          and attention to detail you've experienced at Hibernation Hollow.
+          and attention to detail you've experienced at Pine Acres Glamping.
         </p>
       </Card>
     </div>
