@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Leaf, CloudRain, Trees, Waves, Pencil, ArrowRight, Clock, Sun, Coffee, PersonStanding, Music, Footprints, Flame, BookOpen, Dices, Star, Map, UtensilsCrossed, Droplets, Camera, Car, Store, Fish, Bell, Square, Lock, X, Lightbulb, Play, Timer } from 'lucide-react';
+import { Leaf, CloudRain, Trees, Waves, Pencil, ArrowRight, Clock, Sun, Coffee, PersonStanding, Music, Footprints, Flame, BookOpen, Dices, Star, Map, UtensilsCrossed, Droplets, Camera, Car, Store, Fish, Bell, Square, Lock, X, Lightbulb, Play, Timer, ChevronRight, Trash2 } from 'lucide-react';
 import BackButton from '../components/BackButton';
 import Card from '../components/Card';
 import { COLORS } from '../styles/theme';
@@ -9,7 +9,7 @@ import './CabinMode.css';
 const SOUND_URLS: { [key: string]: string } = {
   rain: 'https://cdn.pixabay.com/audio/2022/05/13/audio_257112ce99.mp3',
   forest: 'https://cdn.pixabay.com/audio/2022/03/10/audio_4dedf5bf94.mp3',
-  creek: 'https://cdn.pixabay.com/audio/2021/08/04/audio_bb630cc098.mp3',
+  creek: 'https://cdn.pixabay.com/audio/2022/08/02/audio_54ca0ffa52.mp3',
 };
 
 const NATURE_SOUNDS = [
@@ -99,6 +99,8 @@ export default function CabinMode() {
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [currentPrompt, setCurrentPrompt] = useState(0);
   const [showJournalModal, setShowJournalModal] = useState(false);
+  const [showEntriesModal, setShowEntriesModal] = useState(false);
+  const [selectedEntry, setSelectedEntry] = useState<any | null>(null);
   const [journalTitle, setJournalTitle] = useState('');
   const [journalContent, setJournalContent] = useState('');
   const [journalEntries, setJournalEntries] = useState<any[]>([]);
@@ -107,6 +109,8 @@ export default function CabinMode() {
   const [selectedJournalTime, setSelectedJournalTime] = useState<number | null>(null);
   const [journalTimeLeft, setJournalTimeLeft] = useState<number>(0);
   const [journalTimerActive, setJournalTimerActive] = useState(false);
+  // Detox session fullscreen
+  const [showDetoxSession, setShowDetoxSession] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const alarmRef = useRef<HTMLAudioElement | null>(null);
 
@@ -128,7 +132,6 @@ export default function CabinMode() {
         setTimeLeft((prev) => {
           if (prev <= 1) {
             playAlarm();
-            setTimerMinutes(null);
             return 0;
           }
           return prev - 1;
@@ -196,6 +199,13 @@ export default function CabinMode() {
     setSelectedJournalTime(null);
   };
 
+  const deleteJournalEntry = (entryId: string) => {
+    const updated = journalEntries.filter(e => e.id !== entryId);
+    setJournalEntries(updated);
+    localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(updated));
+    setSelectedEntry(null);
+  };
+
   const closeJournalModal = () => {
     setShowJournalModal(false);
     setJournalTimerActive(false);
@@ -210,6 +220,18 @@ export default function CabinMode() {
       setJournalTimeLeft(selectedJournalTime * 60);
       setJournalTimerActive(true);
     }
+  };
+
+  const startDetoxSession = (minutes: number) => {
+    setTimerMinutes(minutes);
+    setTimeLeft(minutes * 60);
+    setShowDetoxSession(true);
+  };
+
+  const endDetoxSession = () => {
+    setShowDetoxSession(false);
+    setTimerMinutes(null);
+    setTimeLeft(0);
   };
 
   const toggleSound = (soundId: string) => {
@@ -244,6 +266,36 @@ export default function CabinMode() {
     }
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
+
+  // Fullscreen Detox Session
+  if (showDetoxSession) {
+    return (
+      <div className="detox-session-screen">
+        <div className="detox-content">
+          <Leaf size={64} color="white" className="detox-icon" />
+          <h1 className="detox-title">Digital Detox</h1>
+          <p className="detox-message">
+            You have made the smart choice to disconnect and just enjoy your time in nature.
+          </p>
+          
+          <div className="detox-timer-container">
+            <p className="detox-timer">{formatTime(timeLeft)}</p>
+            <p className="detox-timer-label">Time remaining</p>
+          </div>
+
+          <div className="detox-alarm-notice">
+            <Bell size={18} color="rgba(255,255,255,0.8)" />
+            <span>An alarm will sound when the session is complete</span>
+          </div>
+
+          <button className="end-session-btn" onClick={endDetoxSession}>
+            <Square size={20} />
+            <span>End Session</span>
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="page-container">
@@ -292,39 +344,29 @@ export default function CabinMode() {
           </button>
         </div>
         {journalEntries.length > 0 && (
-          <p className="entry-count">{journalEntries.length} journal {journalEntries.length === 1 ? 'entry' : 'entries'} saved</p>
+          <button className="view-entries-btn" onClick={() => setShowEntriesModal(true)}>
+            <BookOpen size={18} color={COLORS.primary} />
+            <span>View {journalEntries.length} Journal {journalEntries.length === 1 ? 'Entry' : 'Entries'}</span>
+            <ChevronRight size={18} color={COLORS.lightGray} />
+          </button>
         )}
       </Card>
 
       {/* Digital Detox Timer */}
       <Card className="section-card">
         <h2 className="section-title">Digital Detox Timer</h2>
-        {timerMinutes ? (
-          <div className="timer-active">
-            <p className="timer-display">{formatTime(timeLeft)}</p>
-            <p className="timer-label">Unplug and reconnect with nature</p>
-            <div className="alarm-notice">
-              <Bell size={16} color={COLORS.secondary} />
-              <span>An alarm will sound when the session is complete</span>
-            </div>
-            <button className="stop-btn" onClick={() => { setTimerMinutes(null); setTimeLeft(0); }}>
-              <Square size={18} />
-              <span>End Session</span>
+        <p className="section-note">Choose a duration and disconnect</p>
+        <div className="timer-grid">
+          {TIMER_OPTIONS.map((option) => (
+            <button
+              key={option.minutes}
+              className="timer-option"
+              onClick={() => startDetoxSession(option.minutes)}
+            >
+              {option.label}
             </button>
-          </div>
-        ) : (
-          <div className="timer-grid">
-            {TIMER_OPTIONS.map((option) => (
-              <button
-                key={option.minutes}
-                className="timer-option"
-                onClick={() => { setTimerMinutes(option.minutes); setTimeLeft(option.minutes * 60); }}
-              >
-                {option.label}
-              </button>
-            ))}
-          </div>
-        )}
+          ))}
+        </div>
       </Card>
 
       {/* Fun Things To Do */}
@@ -420,6 +462,58 @@ export default function CabinMode() {
                 <Lock size={16} color={COLORS.text} />
                 <p>Your journal entries are stored only on this device and are completely private.</p>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* View Entries Modal */}
+      {showEntriesModal && (
+        <div className="modal-overlay" onClick={() => { setShowEntriesModal(false); setSelectedEntry(null); }}>
+          <div className="entries-modal" onClick={e => e.stopPropagation()}>
+            <div className="journal-modal-header">
+              <button onClick={() => { setShowEntriesModal(false); setSelectedEntry(null); }}><X size={28} color={COLORS.text} /></button>
+              <span>{selectedEntry ? 'Journal Entry' : 'Your Journal'}</span>
+              <div style={{ width: 60 }}></div>
+            </div>
+            <div className="entries-modal-body">
+              {selectedEntry ? (
+                <div className="entry-detail">
+                  <div className="entry-detail-header">
+                    <button className="back-to-list" onClick={() => setSelectedEntry(null)}>
+                      <ArrowRight size={18} style={{ transform: 'rotate(180deg)' }} />
+                      <span>Back</span>
+                    </button>
+                    <button className="delete-entry-btn" onClick={() => deleteJournalEntry(selectedEntry.id)}>
+                      <Trash2 size={18} color="#E74C3C" />
+                    </button>
+                  </div>
+                  <h3 className="entry-detail-title">{selectedEntry.title}</h3>
+                  <p className="entry-detail-date">{selectedEntry.date}</p>
+                  <div className="entry-detail-prompt">
+                    <Lightbulb size={16} color={COLORS.secondary} />
+                    <p>{selectedEntry.prompt}</p>
+                  </div>
+                  <p className="entry-detail-content">{selectedEntry.content}</p>
+                </div>
+              ) : (
+                <div className="entries-list">
+                  {journalEntries.length === 0 ? (
+                    <p className="no-entries">No journal entries yet. Start writing!</p>
+                  ) : (
+                    journalEntries.map((entry) => (
+                      <button key={entry.id} className="entry-item" onClick={() => setSelectedEntry(entry)}>
+                        <div className="entry-info">
+                          <h4 className="entry-title">{entry.title}</h4>
+                          <p className="entry-date">{entry.date}</p>
+                          <p className="entry-preview">{entry.content.substring(0, 60)}...</p>
+                        </div>
+                        <ChevronRight size={20} color={COLORS.lightGray} />
+                      </button>
+                    ))
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
