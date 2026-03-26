@@ -11,6 +11,7 @@ import Newsletter from './pages/Newsletter';
 import Connect from './pages/Connect';
 import Help from './pages/Help';
 import Weather from './pages/Weather';
+import OtherProperties from './pages/OtherProperties';
 import './index.css';
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
           <Route path="/connect" element={<Connect />} />
           <Route path="/help" element={<Help />} />
           <Route path="/weather" element={<Weather />} />
+          <Route path="/other-properties" element={<OtherProperties />} />
         </Routes>
       </BrowserRouter>
     </CabinProvider>

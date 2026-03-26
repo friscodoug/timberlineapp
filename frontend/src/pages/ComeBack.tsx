@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, Calendar, Check, Home, ChevronRight } from 'lucide-react';
+import { Heart, Calendar, Check } from 'lucide-react';
 import BackButton from '../components/BackButton';
 import Card from '../components/Card';
 import { COLORS } from '../styles/theme';
@@ -9,10 +9,6 @@ import './ComeBack.css';
 export default function ComeBack() {
   const openBooking = () => {
     window.open(CONTACT.website, '_blank');
-  };
-
-  const openOtherProperties = () => {
-    window.open('https://pine-acres-glamping.vercel.app/', '_blank');
   };
 
   return (
@@ -56,21 +52,6 @@ export default function ComeBack() {
         <button className="primary-btn" onClick={openBooking}>
           <Calendar size={22} color="white" />
           <span>Book Your Next Stay</span>
-        </button>
-      </Card>
-
-      <Card className="other-properties-card">
-        <h2 className="other-properties-title">Our Other Properties</h2>
-        <p className="other-properties-subtitle">Explore more unique stays from our collection</p>
-        <button className="other-properties-btn" onClick={openOtherProperties}>
-          <div className="property-icon">
-            <Home size={24} color={COLORS.primary} />
-          </div>
-          <div className="property-info">
-            <span className="property-name">Pine Acres Glamping</span>
-            <span className="property-location">Broken Bow, Oklahoma</span>
-          </div>
-          <ChevronRight size={22} color={COLORS.lightGray} />
         </button>
       </Card>
     </div>

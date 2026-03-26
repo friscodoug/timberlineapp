@@ -5,11 +5,11 @@ import Card from '../components/Card';
 import { COLORS } from '../styles/theme';
 import './CabinMode.css';
 
-// Different audio URLs for each nature sound - using freesound.org embeds
+// Different audio URLs for each nature sound
 const SOUND_URLS: { [key: string]: string } = {
-  rain: 'https://soundbible.com/mp3/rainforest_ambience-GlorySunz-1938133500.mp3',
-  forest: 'https://soundbible.com/mp3/Peaceful_Forest-Mike_Koenig-411092821.mp3',
-  creek: 'https://soundbible.com/mp3/Stream-SoundBible.com-1053571356.mp3',
+  rain: 'https://cdn.pixabay.com/audio/2022/05/13/audio_257112ce99.mp3',
+  forest: 'https://cdn.pixabay.com/audio/2022/03/10/audio_4dedf5bf94.mp3',
+  creek: 'https://cdn.pixabay.com/audio/2021/08/04/audio_bb630cc098.mp3',
 };
 
 const NATURE_SOUNDS = [
