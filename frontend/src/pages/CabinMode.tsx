@@ -1,9 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Leaf, CloudRain, Trees, Waves, Pencil, ArrowRight, Clock, Sun, Coffee, PersonStanding, Music, Footprints, Flame, BookOpen, Dices, Star, Map, UtensilsCrossed, Droplets, Camera, Car, Store, Fish, Bell, Square, Lock, X, Lightbulb } from 'lucide-react';
+import { Leaf, CloudRain, Trees, Waves, Pencil, ArrowRight, Clock, Sun, Coffee, PersonStanding, Music, Footprints, Flame, BookOpen, Dices, Star, Map, UtensilsCrossed, Droplets, Camera, Car, Store, Fish, Bell, Square, Lock, X, Lightbulb, Play, Timer } from 'lucide-react';
 import BackButton from '../components/BackButton';
 import Card from '../components/Card';
 import { COLORS } from '../styles/theme';
 import './CabinMode.css';
+
+// Different audio URLs for each nature sound - using freesound.org embeds
+const SOUND_URLS: { [key: string]: string } = {
+  rain: 'https://soundbible.com/mp3/rainforest_ambience-GlorySunz-1938133500.mp3',
+  forest: 'https://soundbible.com/mp3/Peaceful_Forest-Mike_Koenig-411092821.mp3',
+  creek: 'https://soundbible.com/mp3/Stream-SoundBible.com-1053571356.mp3',
+};
 
 const NATURE_SOUNDS = [
   { id: 'rain', name: 'Rain', icon: CloudRain },
@@ -24,6 +31,13 @@ const JOURNAL_PROMPTS = [
   'How does your body feel when you slow down?',
   'What conversation will you remember from this trip?',
   'If these woods could talk, what would they say?',
+];
+
+const JOURNAL_TIMER_OPTIONS = [
+  { label: '5 min', minutes: 5 },
+  { label: '10 min', minutes: 10 },
+  { label: '15 min', minutes: 15 },
+  { label: '20 min', minutes: 20 },
 ];
 
 const TIMER_OPTIONS = [
@@ -89,6 +103,10 @@ export default function CabinMode() {
   const [journalContent, setJournalContent] = useState('');
   const [journalEntries, setJournalEntries] = useState<any[]>([]);
   const [expandedCategory, setExpandedCategory] = useState<number | null>(null);
+  // Journal timer states
+  const [selectedJournalTime, setSelectedJournalTime] = useState<number | null>(null);
+  const [journalTimeLeft, setJournalTimeLeft] = useState<number>(0);
+  const [journalTimerActive, setJournalTimerActive] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const alarmRef = useRef<HTMLAudioElement | null>(null);
 
@@ -102,6 +120,7 @@ export default function CabinMode() {
     };
   }, []);
 
+  // Digital Detox Timer
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (timeLeft > 0) {
@@ -119,11 +138,28 @@ export default function CabinMode() {
     return () => clearInterval(interval);
   }, [timeLeft]);
 
+  // Journal Timer
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (journalTimerActive && journalTimeLeft > 0) {
+      interval = setInterval(() => {
+        setJournalTimeLeft((prev) => {
+          if (prev <= 1) {
+            playAlarm();
+            setJournalTimerActive(false);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [journalTimerActive, journalTimeLeft]);
+
   const playAlarm = () => {
     if (alarmRef.current) {
       alarmRef.current.play().catch(console.error);
     }
-    alert('Session Complete! Your digital detox session has ended. How do you feel?');
   };
 
   const loadJournalEntries = () => {
@@ -155,6 +191,25 @@ export default function CabinMode() {
     setJournalTitle('');
     setJournalContent('');
     setShowJournalModal(false);
+    setJournalTimerActive(false);
+    setJournalTimeLeft(0);
+    setSelectedJournalTime(null);
+  };
+
+  const closeJournalModal = () => {
+    setShowJournalModal(false);
+    setJournalTimerActive(false);
+    setJournalTimeLeft(0);
+    setSelectedJournalTime(null);
+    setJournalTitle('');
+    setJournalContent('');
+  };
+
+  const startJournalTimer = () => {
+    if (selectedJournalTime) {
+      setJournalTimeLeft(selectedJournalTime * 60);
+      setJournalTimerActive(true);
+    }
   };
 
   const toggleSound = (soundId: string) => {
@@ -168,7 +223,8 @@ export default function CabinMode() {
       if (audioRef.current) {
         audioRef.current.pause();
       }
-      const audio = new Audio('https://soundbible.com/mp3/rainforest_ambience-GlorySunz-1938133500.mp3');
+      const soundUrl = SOUND_URLS[soundId] || SOUND_URLS.rain;
+      const audio = new Audio(soundUrl);
       audio.loop = true;
       audio.volume = 0.6;
       audio.play().catch(() => {
@@ -303,14 +359,46 @@ export default function CabinMode() {
 
       {/* Journal Modal */}
       {showJournalModal && (
-        <div className="modal-overlay" onClick={() => setShowJournalModal(false)}>
+        <div className="modal-overlay" onClick={closeJournalModal}>
           <div className="journal-modal" onClick={e => e.stopPropagation()}>
             <div className="journal-modal-header">
-              <button onClick={() => setShowJournalModal(false)}><X size={28} color={COLORS.text} /></button>
+              <button onClick={closeJournalModal}><X size={28} color={COLORS.text} /></button>
               <span>Journal Entry</span>
               <button className="save-btn" onClick={saveJournalEntry}>Save</button>
             </div>
             <div className="journal-modal-body">
+              {/* Timer display when active */}
+              {journalTimerActive && (
+                <div className="journal-timer-display">
+                  <Timer size={20} color={COLORS.secondary} />
+                  <span className="journal-timer-countdown">{formatTime(journalTimeLeft)}</span>
+                </div>
+              )}
+              
+              {/* Timer selection - show only if not started */}
+              {!journalTimerActive && (
+                <div className="journal-timer-section">
+                  <p className="timer-label-small">Set a writing timer (optional)</p>
+                  <div className="journal-timer-options">
+                    {JOURNAL_TIMER_OPTIONS.map((option) => (
+                      <button
+                        key={option.minutes}
+                        className={`journal-timer-btn ${selectedJournalTime === option.minutes ? 'selected' : ''}`}
+                        onClick={() => setSelectedJournalTime(option.minutes)}
+                      >
+                        {option.label}
+                      </button>
+                    ))}
+                  </div>
+                  {selectedJournalTime && (
+                    <button className="start-timer-btn" onClick={startJournalTimer}>
+                      <Play size={16} />
+                      <span>Start Timer</span>
+                    </button>
+                  )}
+                </div>
+              )}
+
               <div className="prompt-box">
                 <Lightbulb size={18} color={COLORS.secondary} />
                 <p>{JOURNAL_PROMPTS[currentPrompt]}</p>

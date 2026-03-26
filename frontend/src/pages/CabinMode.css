@@ -343,3 +343,79 @@
   color: #2B2B2B;
   opacity: 0.7;
 }
+
+
+/* Journal Timer Styles */
+.journal-timer-section {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.timer-label-small {
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 12px;
+}
+
+.journal-timer-options {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.journal-timer-btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 2px solid #2F4F3E;
+  background: white;
+  font-size: 14px;
+  font-weight: 500;
+  color: #2F4F3E;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.journal-timer-btn.selected {
+  background: #2F4F3E;
+  color: white;
+}
+
+.start-timer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  background: #8B6A4E;
+  color: white;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.start-timer-btn:hover {
+  background: #7a5a3e;
+}
+
+.journal-timer-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #2F4F3E;
+  padding: 12px 20px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.journal-timer-countdown {
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+  font-family: monospace;
+}

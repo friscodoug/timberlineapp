@@ -1,3 +1,20 @@
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.section-header .section-title {
+  margin-bottom: 0;
+}
+
+.host-name {
+  font-size: 16px;
+  color: #8B6A4E;
+  font-weight: 600;
+}
+
 .contact-card h2 {
   margin-bottom: 16px;
 }

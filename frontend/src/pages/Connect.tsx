@@ -42,15 +42,15 @@ export default function Connect() {
         <div className="tag-box">
           <AtSign size={24} color={COLORS.secondary} />
           <p className="tag-text">Tag your stay</p>
-          <p className="handle-text">@PineAcresGlamping</p>
+          <p className="handle-text">@HibernationHollowCabins</p>
         </div>
 
         <div className="hashtag-container">
           <p className="hashtag-title">Popular Hashtags</p>
           <div className="hashtags">
-            <span>#PineAcresGlamping</span>
-            <span>#BrokenBowGlamping</span>
-            <span>#GlampingOklahoma</span>
+            <span>#HibernationHollow</span>
+            <span>#BrokenBowCabins</span>
+            <span>#HochatownOK</span>
           </div>
         </div>
       </Card>

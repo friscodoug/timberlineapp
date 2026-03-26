@@ -9,27 +9,35 @@ export interface Cabin {
 export const CABINS: Cabin[] = [
   {
     id: '1',
-    name: "Bigfoot's Tinyhouse",
-    slug: 'bigfoot',
-    image: 'https://customer-assets.emergentagent.com/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/2sn67a4f_IMG_3270.JPG',
-    guidebookUrl: 'https://v2.hostfully.com/bigfoot',
+    name: 'Honeydome',
+    slug: 'honeydome',
+    image: 'https://customer-assets.emergentagent.com/job_9548fa8e-ba19-4435-b9f5-e400e160c6c7/artifacts/7yjce6m0_Dome%20Cover%20final.jpg',
+    guidebookUrl: 'https://v2.hostfully.com/gjvmtqg',
   },
   {
     id: '2',
-    name: 'The Incredi-dome',
-    slug: 'incredi-dome',
-    image: 'https://customer-assets.emergentagent.com/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/hqp3ck81_IMG_3278.JPG',
-    guidebookUrl: 'https://v2.hostfully.com/incredi-dome',
+    name: 'Bear Hug',
+    slug: 'bear-hug',
+    image: 'https://customer-assets.emergentagent.com/job_9548fa8e-ba19-4435-b9f5-e400e160c6c7/artifacts/4hzkny8c_117-web-or-mls-dt3.jpg',
+    guidebookUrl: 'https://v2.hostfully.com/bearhug',
+  },
+  {
+    id: '3',
+    name: 'Little Bear Tinyhouse',
+    slug: 'little-bear',
+    image: 'https://customer-assets.emergentagent.com/job_9548fa8e-ba19-4435-b9f5-e400e160c6c7/artifacts/yq4fdn9c_118-web-or-mls-dt4.jpg',
+    guidebookUrl: 'https://v2.hostfully.com/littlebear',
   },
 ];
 
-export const LOGO_URL = 'https://customer-assets.emergentagent.com/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/5waxvh9h_Pine%20acres%20square%20logo.png';
+export const LOGO_URL = 'https://customer-assets.emergentagent.com/job_9548fa8e-ba19-4435-b9f5-e400e160c6c7/artifacts/n9bd9ko0_HH%20Logo.png';
 
 export const CONTACT = {
   phone: '214-430-3956',
+  name: 'Douglas Rice',
   email: 'doug@hibernationhollowcabins.com',
-  instagram: 'https://www.instagram.com/pineacresglamping/',
-  facebook: 'https://www.facebook.com/pineacresglamping/',
-  website: 'https://www.pineacresglamping.com',
+  instagram: 'https://www.instagram.com/hibernationhollowcabins/',
+  facebook: 'https://www.facebook.com/hibernationhollowcabins/',
+  website: 'https://www.hibernationhollowcabins.com',
   mailchimpUrl: 'https://mailchi.mp/hibernationhollowcabins/5lrqskfq6o',
 };

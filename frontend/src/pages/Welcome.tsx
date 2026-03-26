@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TreePine, Leaf, ArrowRight } from 'lucide-react';
+import { PawPrint, Leaf, ArrowRight } from 'lucide-react';
 import Card from '../components/Card';
 import { COLORS } from '../styles/theme';
 import { LOGO_URL } from '../data/cabins';
@@ -32,14 +32,14 @@ export default function Welcome() {
     <div className="welcome-container">
       <div className="welcome-content">
         <div className="logo-container">
-          <img src={LOGO_URL} alt="Pine Acres Glamping" className="logo" />
+          <img src={LOGO_URL} alt="Hibernation Hollow Cabins" className="logo" />
         </div>
 
         <Card className="welcome-card">
-          <h1 className="headline">Welcome to Pine Acres Glamping</h1>
-          <TreePine size={32} color={COLORS.secondary} className="bear-icon" />
-          <p className="subtext">Your glamping adventure awaits.</p>
-          <p className="instruction">Select your accommodation to unlock your guest portal.</p>
+          <h1 className="headline">Welcome to Hibernation Hollow Cabins</h1>
+          <PawPrint size={32} color={COLORS.secondary} className="bear-icon" />
+          <p className="subtext">Your guide to the Hollow.</p>
+          <p className="instruction">Select your cabin to unlock your guest portal.</p>
           
           <button className="continue-btn" onClick={() => navigate('/cabin-selection')}>
             <span>Continue</span>
@@ -49,7 +49,7 @@ export default function Welcome() {
 
         <div className="footer">
           <Leaf size={16} color={COLORS.primary} />
-          <span>Broken Bow, Oklahoma</span>
+          <span>Broken Bow / Hochatown, Oklahoma</span>
         </div>
       </div>
     </div>

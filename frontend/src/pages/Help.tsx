@@ -18,7 +18,10 @@ export default function Help() {
       </div>
 
       <Card className="contact-card">
-        <h2 className="section-title">Contact Your Host</h2>
+        <div className="section-header">
+          <h2 className="section-title">Contact Your Host</h2>
+          <span className="host-name">Douglas Rice</span>
+        </div>
         
         <a href={`tel:${CONTACT.phone}`} className="contact-btn">
           <div className="icon-circle primary">
