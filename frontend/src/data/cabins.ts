@@ -21,6 +21,20 @@ export const CABINS: Cabin[] = [
     image: 'https://customer-assets.emergentagent.com/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/hqp3ck81_IMG_3278.JPG',
     guidebookUrl: 'https://v2.hostfully.com/incredi-dome',
   },
+  {
+    id: '3',
+    name: 'The Sereni-Dome',
+    slug: 'sereni-dome',
+    image: 'https://customer-assets.emergentagent.com/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/kdjw9jx5_6-web-or-mls-DJI_0284.jpg',
+    guidebookUrl: 'https://hostful.ly/sereni-dome',
+  },
+  {
+    id: '4',
+    name: 'The Starview Cabin',
+    slug: 'starview-cabin',
+    image: 'https://customer-assets.emergentagent.com/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/ngq4mc6t_DSC_7791.jpg',
+    guidebookUrl: 'https://hostful.ly/starviewcabin',
+  },
 ];
 
 export const LOGO_URL = 'https://customer-assets.emergentagent.com/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/5waxvh9h_Pine%20acres%20square%20logo.png';
