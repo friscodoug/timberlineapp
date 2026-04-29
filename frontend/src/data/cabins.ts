@@ -39,6 +39,8 @@ export const CABINS: Cabin[] = [
 
 export const LOGO_URL = 'https://customer-assets.emergentagent.com/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/5waxvh9h_Pine%20acres%20square%20logo.png';
 
+export const CABIN_MODE_LOGO_URL = '/cabin-mode-logo.png';
+
 export const CONTACT = {
   phone: '214-430-3956',
   name: 'Douglas Rice',

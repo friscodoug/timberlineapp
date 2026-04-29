@@ -18,6 +18,26 @@
   gap: 16px;
 }
 
+.cabin-mode-logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.cabin-mode-logo {
+  width: 220px;
+  height: auto;
+  object-fit: contain;
+}
+
+.cabin-mode-tagline {
+  text-align: center;
+  font-size: 14px;
+  font-style: italic;
+  color: #64748b;
+  margin-bottom: 12px;
+}
+
 .logo-container {
   display: flex;
   justify-content: center;

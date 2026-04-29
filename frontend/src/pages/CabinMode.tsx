@@ -3,6 +3,7 @@ import { Leaf, CloudRain, Trees, Waves, Pencil, ArrowRight, Clock, Sun, Coffee, 
 import BackButton from '../components/BackButton';
 import Card from '../components/Card';
 import { COLORS } from '../styles/theme';
+import { CABIN_MODE_LOGO_URL } from '../data/cabins';
 import './CabinMode.css';
 
 // Different audio URLs for each nature sound
@@ -302,8 +303,7 @@ export default function CabinMode() {
       <BackButton />
 
       <div className="header-center">
-        <Leaf size={48} color={COLORS.primary} />
-        <h1 className="page-title center">Cabin Mode</h1>
+        <img src={CABIN_MODE_LOGO_URL} alt="Cabin Mode" className="cabin-mode-page-logo" />
         <p className="header-subtext">Take a break from the noise and enjoy the woods.</p>
       </div>
 

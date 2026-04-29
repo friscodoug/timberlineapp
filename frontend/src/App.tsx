@@ -6,6 +6,7 @@ import CabinSelection from './pages/CabinSelection';
 import Dashboard from './pages/Dashboard';
 import Guidebook from './pages/Guidebook';
 import CabinMode from './pages/CabinMode';
+import CampfireMode from './pages/CampfireMode';
 import ComeBack from './pages/ComeBack';
 import Newsletter from './pages/Newsletter';
 import Connect from './pages/Connect';
@@ -24,6 +25,7 @@ export default function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/guidebook" element={<Guidebook />} />
           <Route path="/cabin-mode" element={<CabinMode />} />
+          <Route path="/campfire-mode" element={<CampfireMode />} />
           <Route path="/come-back" element={<ComeBack />} />
           <Route path="/newsletter" element={<Newsletter />} />
           <Route path="/connect" element={<Connect />} />

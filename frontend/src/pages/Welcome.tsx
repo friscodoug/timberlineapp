@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { TreePine, Leaf, ArrowRight } from 'lucide-react';
 import Card from '../components/Card';
 import { COLORS } from '../styles/theme';
-import { LOGO_URL } from '../data/cabins';
+import { LOGO_URL, CABIN_MODE_LOGO_URL } from '../data/cabins';
 import { useCabin } from '../context/CabinContext';
 import './Welcome.css';
 
@@ -31,6 +31,10 @@ export default function Welcome() {
   return (
     <div className="welcome-container">
       <div className="welcome-content">
+        <div className="cabin-mode-logo-container">
+          <img src={CABIN_MODE_LOGO_URL} alt="Cabin Mode" className="cabin-mode-logo" />
+        </div>
+        <p className="cabin-mode-tagline">a guided stay experience brought to you by</p>
         <div className="logo-container">
           <img src={LOGO_URL} alt="Pine Acres Glamping" className="logo" />
         </div>

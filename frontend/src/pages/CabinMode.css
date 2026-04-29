@@ -1,3 +1,10 @@
+.cabin-mode-page-logo {
+  width: 240px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+
 .header-subtext {
   font-size: 16px;
   color: #2B2B2B;
