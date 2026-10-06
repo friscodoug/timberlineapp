@@ -133,14 +133,14 @@ export const PROPERTIES: Property[] = [
     id: '1',
     name: 'Rocky Creek Cabin',
     slug: 'rocky-creek',
-    image: 'https://customer-assets-jt897jd0.emergentagent.net/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/5c254be4bdd87927_DJI_0771%202.webp',
+    image: 'https://customer-assets-jt897jd0.emergentagent.net/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/1d9716c03e7d0343_DJI_0241%202.webp',
     guidebookUrl: 'https://hostful.ly/rockycreek',
   },
   {
     id: '2',
     name: 'Champagne Bliss Cabin',
     slug: 'champagne-bliss',
-    image: 'https://customer-assets-jt897jd0.emergentagent.net/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/1d9716c03e7d0343_DJI_0241%202.webp',
+    image: 'https://customer-assets-jt897jd0.emergentagent.net/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/5c254be4bdd87927_DJI_0771%202.webp',
     guidebookUrl: 'https://hostful.ly/champagnebliss',
   },
 ];
