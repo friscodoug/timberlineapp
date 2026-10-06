@@ -1,7 +1,7 @@
 {
-  "name": "Pine Acres Glamping Guest Portal",
-  "short_name": "Pine Acres",
-  "description": "Digital guest portal for Pine Acres Glamping",
+  "name": "Timberline Stays Guest Portal",
+  "short_name": "Timberline",
+  "description": "Digital guest portal for Timberline Stays",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#F5F3EF",
@@ -9,13 +9,13 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "https://customer-assets.emergentagent.com/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/5waxvh9h_Pine%20acres%20square%20logo.png",
+      "src": "/timberline-logo.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "https://customer-assets.emergentagent.com/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/5waxvh9h_Pine%20acres%20square%20logo.png",
+      "src": "/timberline-logo.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

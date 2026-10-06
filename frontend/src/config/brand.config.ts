@@ -1,6 +1,6 @@
 /**
- * BRAND CONFIGURATION FILE
- * ========================
+ * BRAND CONFIGURATION FILE - TIMBERLINE STAYS
+ * ============================================
  * 
  * To rebrand this app for a different property:
  * 1. Update all values in this file
@@ -15,35 +15,35 @@
 // ===========================================
 export const BRAND = {
   // Core brand info
-  name: 'Pine Acres Glamping',
-  shortName: 'Pine Acres',
-  tagline: 'Your glamping adventure awaits.',
-  description: 'Digital guest portal for Pine Acres Glamping',
-  location: 'Broken Bow, Oklahoma',
+  name: 'Timberline Stays',
+  shortName: 'Timberline',
+  tagline: 'Your guide to adventure.',
+  description: 'Digital guest portal for Timberline Stays',
+  location: 'Hochatown & Broken Bow, Oklahoma',
   
   // Welcome page
-  welcomeHeadline: 'Welcome to Pine Acres Glamping',
-  welcomeSubtext: 'Select your accommodation to unlock your guest portal.',
+  welcomeHeadline: 'Welcome to Timberline Stays',
+  welcomeSubtext: 'Select your cabin to unlock your guest portal.',
   
   // Cabin Mode branding
   cabinModeTagline: 'a guided stay experience brought to you by',
   
   // Come Back page
   comeBackHeadline: 'Come Back Soon!',
-  comeBackSubtext: 'Come back to Pine Acres.',
-  discountCode: 'PINEACRES10',
+  comeBackSubtext: 'Come back to Timberline Stays.',
+  discountCode: 'TIMBERLINE10',
   discountAmount: '10% OFF',
-  bookingUrl: 'https://www.pineacresglamping.com',
+  bookingUrl: 'https://www.timberlinestays.com',
   
   // Other Properties page (sister properties)
   otherPropertiesTitle: 'Our Other Properties',
-  otherPropertiesDescription: 'Explore more unique stays from our family of properties. Each location offers the same quality and attention to detail you\'ve experienced at Pine Acres Glamping.',
+  otherPropertiesDescription: 'Explore more unique stays from our family of properties. Each location offers the same quality and attention to detail you\'ve experienced at Timberline Stays.',
   sisterProperties: [
     {
       name: 'Hibernation Hollow Cabins',
-      description: 'Cozy cabin retreats in the Ouachita Mountains',
+      description: 'Cozy cabin retreats including the Honeydome, Bear Hug, and Little Bear Tinyhouse',
       url: 'https://www.hibernationhollowcabins.com',
-      image: 'https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=800',
+      image: 'https://customer-assets.emergentagent.com/job_9548fa8e-ba19-4435-b9f5-e400e160c6c7/artifacts/7yjce6m0_Dome%20Cover%20final.jpg',
     },
   ],
 };
@@ -82,15 +82,15 @@ export const COLORS = {
 // ===========================================
 export const IMAGES = {
   // Main logo (should have transparent background)
-  logo: '/pine-acres-logo.png',
+  logo: '/timberline-logo.png',
   
   // Cabin Mode logo
   cabinModeLogo: '/cabin-mode-logo.png',
   
   // Favicon/App icon (used in manifest.json and index.html)
-  favicon: '/pine-acres-logo.png',
-  appIcon192: '/pine-acres-logo.png',
-  appIcon512: '/pine-acres-logo.png',
+  favicon: '/timberline-logo.png',
+  appIcon192: '/timberline-logo.png',
+  appIcon512: '/timberline-logo.png',
 };
 
 // ===========================================
@@ -99,19 +99,19 @@ export const IMAGES = {
 export const CONTACT = {
   // Host info
   hostName: 'Douglas Rice',
-  phone: '214-430-3956',
-  email: 'doug@hibernationhollowcabins.com',
+  phone: '580-257-8371',
+  email: 'doug@timberlinestays.com',
   
-  // Social media
-  instagram: 'https://www.instagram.com/pineacresglamping/',
-  instagramHandle: '@pineacresglamping',
-  facebook: 'https://www.facebook.com/pineacresglamping/',
-  facebookName: 'Pine Acres Glamping',
+  // Social media (using Hibernation Hollow for now)
+  instagram: 'https://www.instagram.com/hibernationhollowcabins/',
+  instagramHandle: '@hibernationhollowcabins',
+  facebook: 'https://www.facebook.com/hibernationhollowcabins/',
+  facebookName: 'Hibernation Hollow Cabins',
   
   // Website
-  website: 'https://www.pineacresglamping.com',
+  website: 'https://www.timberlinestays.com',
   
-  // Newsletter
+  // Newsletter (using The Pine Post)
   newsletterName: 'The Pine Post',
   newsletterUrl: 'https://mailchi.mp/hibernationhollowcabins/5lrqskfq6o',
   newsletterDescription: 'Get exclusive deals, local tips, and cabin updates delivered to your inbox.',
@@ -131,31 +131,17 @@ export interface Property {
 export const PROPERTIES: Property[] = [
   {
     id: '1',
-    name: "Bigfoot's Tinyhouse",
-    slug: 'bigfoot',
-    image: 'https://customer-assets.emergentagent.com/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/2sn67a4f_IMG_3270.JPG',
-    guidebookUrl: 'https://v2.hostfully.com/bigfoot',
+    name: 'Rocky Creek Cabin',
+    slug: 'rocky-creek',
+    image: 'https://customer-assets-jt897jd0.emergentagent.net/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/5c254be4bdd87927_DJI_0771%202.webp',
+    guidebookUrl: 'https://hostful.ly/rockycreek',
   },
   {
     id: '2',
-    name: 'The Incredi-dome',
-    slug: 'incredi-dome',
-    image: 'https://customer-assets.emergentagent.com/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/hqp3ck81_IMG_3278.JPG',
-    guidebookUrl: 'https://v2.hostfully.com/incredi-dome',
-  },
-  {
-    id: '3',
-    name: 'The Sereni-Dome',
-    slug: 'sereni-dome',
-    image: 'https://customer-assets.emergentagent.com/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/kdjw9jx5_6-web-or-mls-DJI_0284.jpg',
-    guidebookUrl: 'https://hostful.ly/sereni-dome',
-  },
-  {
-    id: '4',
-    name: 'The Starview Cabin',
-    slug: 'starview-cabin',
-    image: 'https://customer-assets.emergentagent.com/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/ngq4mc6t_DSC_7791.jpg',
-    guidebookUrl: 'https://hostful.ly/starviewcabin',
+    name: 'Champagne Bliss Cabin',
+    slug: 'champagne-bliss',
+    image: 'https://customer-assets-jt897jd0.emergentagent.net/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/1d9716c03e7d0343_DJI_0241%202.webp',
+    guidebookUrl: 'https://hostful.ly/champagnebliss',
   },
 ];
 
@@ -163,22 +149,22 @@ export const PROPERTIES: Property[] = [
 // LOCATION & WEATHER
 // ===========================================
 export const LOCATION = {
-  // For weather API
+  // For weather API (Hochatown, OK)
   latitude: 34.17,
   longitude: -94.76,
   cityName: 'Hochatown',
   stateName: 'Oklahoma',
   
   // Display
-  displayLocation: 'Broken Bow, Oklahoma',
+  displayLocation: 'Hochatown & Broken Bow, Oklahoma',
 };
 
 // ===========================================
 // APP METADATA (for index.html & manifest.json)
 // ===========================================
 export const APP_META = {
-  title: 'Pine Acres Glamping Guest Portal',
-  description: 'Pine Acres Glamping Guest Portal - Your guide to glamping in Broken Bow',
+  title: 'Timberline Stays Guest Portal',
+  description: 'Timberline Stays Guest Portal - Your guide to adventure in Broken Bow',
   themeColor: '#2F4F3E',
   backgroundColor: '#F5F3EF',
 };

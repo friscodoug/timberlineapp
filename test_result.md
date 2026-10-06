@@ -271,6 +271,18 @@ metadata:
   test_sequence: 1
   run_ui: false
 
+  - task: "Timberline Stays Rebranding"
+    implemented: true
+    working: true
+    file: "src/config/brand.config.ts"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ COMPREHENSIVE REBRANDING TESTING COMPLETE - All Timberline Stays branding verified across entire app. Welcome page: Timberline Stays logo (green circular with cabin/mountains) ✅, headline 'Welcome to Timberline Stays' ✅, tagline 'Your guide to adventure.' ✅, location 'Hochatown & Broken Bow, Oklahoma' ✅. Cabin Selection: Exactly 2 cabins (Rocky Creek Cabin, Champagne Bliss Cabin) ✅. Dashboard: 'Welcome to Rocky Creek Cabin' ✅, all 9 menu tiles present ✅, Weather subtitle '5-day forecast for Hochatown' ✅, Change cabin button ✅. Come Back & Save: Discount code 'TIMBERLINE10' ✅, '10% OFF' ✅, 'Book Your Next Stay' button ✅. Help Page: Host 'Douglas Rice' ✅, phone '580-257-8371' ✅, Call and Text buttons ✅. Other Properties: Hibernation Hollow Cabins ✅, Visit Website link ✅. Newsletter: 'The Pine Post' (unchanged as requested) ✅. Connect With Us: Instagram and Facebook buttons ✅, @hibernationhollowcabins handle ✅. Digital Guidebook: Opens hostful.ly/rockycreek for Rocky Creek Cabin ✅. Cabin Mode: Nature sounds (Rain, Forest, Creek) ✅, Journal ✅, Timer ✅. Campfire Mode: Games and Stories sections ✅. Mobile-responsive design (390x844) confirmed. All branding successfully updated from Pine Acres Glamping to Timberline Stays."
+
 test_plan:
   current_focus: []
   stuck_tasks: []
@@ -286,3 +298,5 @@ agent_communication:
     message: "Starting comprehensive testing of Campfire Mode feature. Found React frontend running on port 3000 with complete implementation including games, stories, tabs, modal, and Web Speech API audio functionality. Testing all specified test cases."
   - agent: "testing"
     message: "✅ CAMPFIRE MODE TESTING COMPLETE - All functionality working perfectly! Header layout ✅, Tab navigation ✅, All 7 family games with expand/collapse ✅, All 3 story categories (Family-Friendly, Scary, Local Folklore) with 3 stories each ✅, Story modal with audio controls ✅, Web Speech API integration ✅. Mobile-responsive design confirmed. Feature ready for production use."
+  - agent: "testing"
+    message: "✅ TIMBERLINE STAYS REBRANDING VERIFICATION COMPLETE - Tested all 11 pages/sections specified in review request. All branding successfully updated: Logo ✅, Brand name ✅, Tagline ✅, Location ✅, 2 cabins (Rocky Creek, Champagne Bliss) ✅, Discount code TIMBERLINE10 ✅, Host Douglas Rice ✅, Phone 580-257-8371 ✅, Sister property Hibernation Hollow ✅, Newsletter 'The Pine Post' unchanged ✅, Social links ✅, Guidebook links ✅, All features (Cabin Mode, Campfire Mode) working ✅. Mobile viewport (390x844) testing confirmed. App ready for production with new Timberline Stays branding."
