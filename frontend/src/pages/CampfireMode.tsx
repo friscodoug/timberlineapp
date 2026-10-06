@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Flame, Users, BookOpen, ChevronDown, ChevronUp, X, Play, Pause, Square, Volume2 } from 'lucide-react';
 import BackButton from '../components/BackButton';
 import Card from '../components/Card';
-import { COLORS } from '../styles/theme';
+import { COLORS } from '../config/brand.config';
 import { CAMPFIRE_GAMES, CAMPFIRE_STORIES, Game, Story } from '../data/campfire';
 import './CampfireMode.css';
 

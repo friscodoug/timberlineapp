@@ -2,7 +2,7 @@ import React from 'react';
 import { Book, Wifi, Droplets, Flame, Tv, LogOut, Home, UtensilsCrossed, Map, Beer, ExternalLink } from 'lucide-react';
 import BackButton from '../components/BackButton';
 import Card from '../components/Card';
-import { COLORS } from '../styles/theme';
+import { COLORS, LOCATION } from '../config/brand.config';
 import { useCabin } from '../context/CabinContext';
 import './Guidebook.css';
 
@@ -13,7 +13,7 @@ const GUIDE_ITEMS = [
   { icon: Tv, text: 'TV instructions' },
   { icon: LogOut, text: 'Checkout steps' },
   { icon: Home, text: 'Property information' },
-  { icon: UtensilsCrossed, text: 'Restaurants in Hochatown' },
+  { icon: UtensilsCrossed, text: `Restaurants in ${LOCATION.cityName}` },
   { icon: Map, text: 'Local activities and hiking' },
   { icon: Beer, text: 'Breweries and coffee shops' },
 ];

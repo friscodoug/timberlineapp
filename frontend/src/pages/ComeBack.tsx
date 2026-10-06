@@ -2,13 +2,12 @@ import React from 'react';
 import { Heart, Calendar, Check } from 'lucide-react';
 import BackButton from '../components/BackButton';
 import Card from '../components/Card';
-import { COLORS } from '../styles/theme';
-import { CONTACT } from '../data/cabins';
+import { COLORS, BRAND, CONTACT } from '../config/brand.config';
 import './ComeBack.css';
 
 export default function ComeBack() {
   const openBooking = () => {
-    window.open(CONTACT.website, '_blank');
+    window.open(BRAND.bookingUrl, '_blank');
   };
 
   return (
@@ -17,8 +16,8 @@ export default function ComeBack() {
 
       <div className="header-center">
         <Heart size={48} color={COLORS.secondary} />
-        <h1 className="page-title center">Love your stay?</h1>
-        <p className="subheadline">Come back to Pine Acres.</p>
+        <h1 className="page-title center">{BRAND.comeBackHeadline}</h1>
+        <p className="subheadline">{BRAND.comeBackSubtext}</p>
       </div>
 
       <Card>
@@ -29,9 +28,9 @@ export default function ComeBack() {
         <div className="code-container">
           <p className="code-label">Your Discount Code</p>
           <div className="code-box">
-            <span className="code-text">PINEACRES10</span>
+            <span className="code-text">{BRAND.discountCode}</span>
           </div>
-          <p className="code-hint">Use at checkout for 10% off</p>
+          <p className="code-hint">Use at checkout for {BRAND.discountAmount}</p>
         </div>
 
         <div className="benefits">

@@ -2,9 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Book, Leaf, Gift, Mail, Share2, HelpCircle, ChevronRight, RefreshCw, CloudSun, Building2, Flame } from 'lucide-react';
 import Card from '../components/Card';
-import { COLORS } from '../styles/theme';
+import { COLORS, IMAGES, CONTACT, LOCATION } from '../config/brand.config';
 import { useCabin } from '../context/CabinContext';
-import { CABIN_MODE_LOGO_URL } from '../data/cabins';
 import './Dashboard.css';
 
 interface MenuItem {
@@ -19,12 +18,12 @@ interface MenuItem {
 
 const MENU_ITEMS: MenuItem[] = [
   { id: '1', title: 'Digital Guidebook', subtitle: 'Everything you need to know in one place', icon: Book, route: '/guidebook', color: COLORS.primary },
-  { id: '2', title: 'Weather', subtitle: '5-day forecast for Hochatown', icon: CloudSun, route: '/weather', color: '#5A9BD5' },
-  { id: '3', title: 'Cabin Mode', subtitle: 'Disconnect from technology and enjoy nature', imageIcon: CABIN_MODE_LOGO_URL, route: '/cabin-mode', color: '#4A7C59' },
-  { id: '4', title: 'Campfire Mode', subtitle: 'Games and stories for the whole family', icon: Flame, route: '/campfire-mode', color: '#C25E2D' },
-  { id: '5', title: 'Come Back & Save', subtitle: "Who doesn't LOVE discounts?", icon: Gift, route: '/come-back', color: '#8B6A4E' },
+  { id: '2', title: 'Weather', subtitle: `5-day forecast for ${LOCATION.cityName}`, icon: CloudSun, route: '/weather', color: COLORS.weatherBlue },
+  { id: '3', title: 'Cabin Mode', subtitle: 'Disconnect from technology and enjoy nature', imageIcon: IMAGES.cabinModeLogo, route: '/cabin-mode', color: COLORS.cabinModeGreen },
+  { id: '4', title: 'Campfire Mode', subtitle: 'Games and stories for the whole family', icon: Flame, route: '/campfire-mode', color: COLORS.campfireOrange },
+  { id: '5', title: 'Come Back & Save', subtitle: "Who doesn't LOVE discounts?", icon: Gift, route: '/come-back', color: COLORS.secondary },
   { id: '6', title: 'Our Other Properties', subtitle: 'Explore more unique stays', icon: Building2, route: '/other-properties', color: '#6B5B95' },
-  { id: '7', title: 'Join the Pine Post', subtitle: 'Our monthly newsletter', icon: Mail, route: '/newsletter', color: '#5B8A72' },
+  { id: '7', title: `Join ${CONTACT.newsletterName}`, subtitle: 'Our monthly newsletter', icon: Mail, route: '/newsletter', color: '#5B8A72' },
   { id: '8', title: 'Connect With Us', subtitle: 'Follow us on social media', icon: Share2, route: '/connect', color: '#6B8E7A' },
   { id: '9', title: 'Need Help', subtitle: "We're here for you", icon: HelpCircle, route: '/help', color: '#7A6B5B' },
 ];

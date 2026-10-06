@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { CABINS } from '../data/cabins';
-import type { Cabin } from '../data/cabins';
+import { PROPERTIES } from '../config/brand.config';
+import type { Property } from '../config/brand.config';
 
 interface CabinContextType {
-  selectedCabin: Cabin | null;
-  selectCabin: (cabin: Cabin) => void;
+  selectedCabin: Property | null;
+  selectCabin: (cabin: Property) => void;
   clearCabin: () => void;
   isLoading: boolean;
 }
@@ -14,7 +14,7 @@ const CabinContext = createContext<CabinContextType | undefined>(undefined);
 const STORAGE_KEY = 'selectedCabin';
 
 export function CabinProvider({ children }: { children: ReactNode }) {
-  const [selectedCabin, setSelectedCabin] = useState<Cabin | null>(null);
+  const [selectedCabin, setSelectedCabin] = useState<Property | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export function CabinProvider({ children }: { children: ReactNode }) {
     try {
       const savedCabinId = localStorage.getItem(STORAGE_KEY);
       if (savedCabinId) {
-        const cabin = CABINS.find(c => c.id === savedCabinId);
+        const cabin = PROPERTIES.find(c => c.id === savedCabinId);
         if (cabin) {
           setSelectedCabin(cabin);
         }
@@ -37,7 +37,7 @@ export function CabinProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const selectCabin = (cabin: Cabin) => {
+  const selectCabin = (cabin: Property) => {
     try {
       localStorage.setItem(STORAGE_KEY, cabin.id);
       setSelectedCabin(cabin);

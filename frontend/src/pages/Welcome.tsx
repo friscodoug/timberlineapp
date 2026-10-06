@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TreePine, Leaf, ArrowRight } from 'lucide-react';
 import Card from '../components/Card';
-import { COLORS } from '../styles/theme';
-import { LOGO_URL, CABIN_MODE_LOGO_URL } from '../data/cabins';
+import { COLORS, IMAGES, BRAND, LOCATION } from '../config/brand.config';
 import { useCabin } from '../context/CabinContext';
 import './Welcome.css';
 
@@ -32,18 +31,18 @@ export default function Welcome() {
     <div className="welcome-container">
       <div className="welcome-content">
         <div className="cabin-mode-logo-container">
-          <img src={CABIN_MODE_LOGO_URL} alt="Cabin Mode" className="cabin-mode-logo" />
+          <img src={IMAGES.cabinModeLogo} alt="Cabin Mode" className="cabin-mode-logo" />
         </div>
-        <p className="cabin-mode-tagline">a guided stay experience brought to you by</p>
+        <p className="cabin-mode-tagline">{BRAND.cabinModeTagline}</p>
         <div className="logo-container">
-          <img src={LOGO_URL} alt="Pine Acres Glamping" className="logo" />
+          <img src={IMAGES.logo} alt={BRAND.name} className="logo" />
         </div>
 
         <Card className="welcome-card">
-          <h1 className="headline">Welcome to Pine Acres Glamping</h1>
+          <h1 className="headline">{BRAND.welcomeHeadline}</h1>
           <TreePine size={32} color={COLORS.secondary} className="bear-icon" />
-          <p className="subtext">Your glamping adventure awaits.</p>
-          <p className="instruction">Select your accommodation to unlock your guest portal.</p>
+          <p className="subtext">{BRAND.tagline}</p>
+          <p className="instruction">{BRAND.welcomeSubtext}</p>
           
           <button className="continue-btn" onClick={() => navigate('/cabin-selection')}>
             <span>Continue</span>
@@ -53,7 +52,7 @@ export default function Welcome() {
 
         <div className="footer">
           <Leaf size={16} color={COLORS.primary} />
-          <span>Broken Bow, Oklahoma</span>
+          <span>{LOCATION.displayLocation}</span>
         </div>
       </div>
     </div>

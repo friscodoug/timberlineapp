@@ -2,8 +2,7 @@ import React from 'react';
 import { Mail, Leaf, Send } from 'lucide-react';
 import BackButton from '../components/BackButton';
 import Card from '../components/Card';
-import { COLORS } from '../styles/theme';
-import { CONTACT } from '../data/cabins';
+import { COLORS, CONTACT } from '../config/brand.config';
 import './Newsletter.css';
 
 const BENEFITS = [
@@ -15,7 +14,7 @@ const BENEFITS = [
 
 export default function Newsletter() {
   const handleSubscribe = () => {
-    window.open(CONTACT.mailchimpUrl, '_blank');
+    window.open(CONTACT.newsletterUrl, '_blank');
   };
 
   return (
@@ -28,7 +27,7 @@ export default function Newsletter() {
       </div>
 
       <Card>
-        <p className="description-left">Join our Pine Post newsletter for:</p>
+        <p className="description-left">Join our {CONTACT.newsletterName} newsletter for:</p>
 
         <div className="benefits-list">
           {BENEFITS.map((benefit, index) => (
@@ -41,7 +40,7 @@ export default function Newsletter() {
 
         <button className="primary-btn" onClick={handleSubscribe}>
           <Send size={20} color="white" />
-          <span>Join the Pine Post</span>
+          <span>Join {CONTACT.newsletterName}</span>
         </button>
 
         <p className="privacy-text">

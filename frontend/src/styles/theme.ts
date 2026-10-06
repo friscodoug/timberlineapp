@@ -1,15 +1,12 @@
-// Hibernation Hollow Guest Portal - Theme Constants
+/**
+ * THEME CONSTANTS
+ * ===============
+ * Re-exports colors from brand.config.ts for backward compatibility.
+ * 
+ * For new code, import COLORS directly from '@/config/brand.config'
+ */
 
-export const COLORS = {
-  primary: '#2F4F3E',
-  secondary: '#8B6A4E',
-  background: '#F5F3EF',
-  text: '#2B2B2B',
-  white: '#FFFFFF',
-  lightGray: '#E8E6E2',
-  success: '#4CAF50',
-  error: '#E74C3C',
-};
+export { COLORS } from '../config/brand.config';
 
 export const FONTS = {
   sizes: {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { CloudSun, Sun, Cloud, CloudRain, CloudSnow, Wind, Droplets, Thermometer } from 'lucide-react';
 import BackButton from '../components/BackButton';
 import Card from '../components/Card';
-import { COLORS } from '../styles/theme';
+import { COLORS, LOCATION } from '../config/brand.config';
 import './Weather.css';
 
 interface DayForecast {
@@ -44,9 +44,9 @@ export default function Weather() {
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        // Hochatown, OK coordinates
-        const lat = 34.17;
-        const lon = -94.76;
+        // Use location from brand config
+        const lat = LOCATION.latitude;
+        const lon = LOCATION.longitude;
         
         const response = await fetch(
           `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=America/Chicago&forecast_days=5`
@@ -94,7 +94,7 @@ export default function Weather() {
 
       <div className="header-center">
         <CloudSun size={48} color={COLORS.primary} />
-        <h1 className="page-title center">Weather in Hochatown</h1>
+        <h1 className="page-title center">Weather in {LOCATION.cityName}</h1>
         <p className="header-subtext">Plan your outdoor adventures</p>
       </div>
 

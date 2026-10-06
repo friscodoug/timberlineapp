@@ -2,8 +2,7 @@ import React from 'react';
 import { LifeBuoy, Phone, MessageCircle, ChevronRight, Info, AlertTriangle } from 'lucide-react';
 import BackButton from '../components/BackButton';
 import Card from '../components/Card';
-import { COLORS } from '../styles/theme';
-import { CONTACT } from '../data/cabins';
+import { COLORS, CONTACT } from '../config/brand.config';
 import './Help.css';
 
 export default function Help() {
@@ -20,7 +19,7 @@ export default function Help() {
       <Card className="contact-card">
         <div className="section-header">
           <h2 className="section-title">Contact Your Host</h2>
-          <span className="host-name">Douglas Rice</span>
+          <span className="host-name">{CONTACT.hostName}</span>
         </div>
         
         <a href={`tel:${CONTACT.phone}`} className="contact-btn">

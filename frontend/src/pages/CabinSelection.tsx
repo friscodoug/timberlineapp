@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { HelpCircle, Images, X } from 'lucide-react';
 import BackButton from '../components/BackButton';
 import Card from '../components/Card';
-import { COLORS } from '../styles/theme';
-import { CABINS } from '../data/cabins';
-import type { Cabin } from '../data/cabins';
+import { COLORS, PROPERTIES } from '../config/brand.config';
+import type { Property } from '../config/brand.config';
 import { useCabin } from '../context/CabinContext';
 import './CabinSelection.css';
 
@@ -14,7 +13,7 @@ export default function CabinSelection() {
   const { selectCabin } = useCabin();
   const [showPhotos, setShowPhotos] = useState(false);
 
-  const handleSelectCabin = (cabin: Cabin) => {
+  const handleSelectCabin = (cabin: Property) => {
     selectCabin(cabin);
     navigate('/dashboard');
   };
@@ -27,7 +26,7 @@ export default function CabinSelection() {
       <p className="page-subtitle">Tap your cabin to continue</p>
 
       <div className="cabin-grid">
-        {CABINS.map((cabin) => (
+        {PROPERTIES.map((cabin) => (
           <div
             key={cabin.id}
             className="cabin-card"
@@ -61,7 +60,7 @@ export default function CabinSelection() {
               </button>
             </div>
             <div className="modal-body">
-              {CABINS.map((cabin) => (
+              {PROPERTIES.map((cabin) => (
                 <Card key={cabin.id} className="modal-cabin-card">
                   <img src={cabin.image} alt={cabin.name} className="modal-cabin-image" />
                   <p className="modal-cabin-name">{cabin.name}</p>

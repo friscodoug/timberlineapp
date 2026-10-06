@@ -1,52 +1,19 @@
-export interface Cabin {
-  id: string;
-  name: string;
-  slug: string;
-  image: string;
-  guidebookUrl: string;
-}
+/**
+ * CABIN DATA
+ * ==========
+ * Re-exports from brand.config.ts for backward compatibility.
+ * 
+ * For new code, import directly from '@/config/brand.config'
+ */
 
-export const CABINS: Cabin[] = [
-  {
-    id: '1',
-    name: "Bigfoot's Tinyhouse",
-    slug: 'bigfoot',
-    image: 'https://customer-assets.emergentagent.com/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/2sn67a4f_IMG_3270.JPG',
-    guidebookUrl: 'https://v2.hostfully.com/bigfoot',
-  },
-  {
-    id: '2',
-    name: 'The Incredi-dome',
-    slug: 'incredi-dome',
-    image: 'https://customer-assets.emergentagent.com/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/hqp3ck81_IMG_3278.JPG',
-    guidebookUrl: 'https://v2.hostfully.com/incredi-dome',
-  },
-  {
-    id: '3',
-    name: 'The Sereni-Dome',
-    slug: 'sereni-dome',
-    image: 'https://customer-assets.emergentagent.com/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/kdjw9jx5_6-web-or-mls-DJI_0284.jpg',
-    guidebookUrl: 'https://hostful.ly/sereni-dome',
-  },
-  {
-    id: '4',
-    name: 'The Starview Cabin',
-    slug: 'starview-cabin',
-    image: 'https://customer-assets.emergentagent.com/job_937b1701-e091-472c-bea4-8ba39c7f7d7d/artifacts/ngq4mc6t_DSC_7791.jpg',
-    guidebookUrl: 'https://hostful.ly/starviewcabin',
-  },
-];
-
-export const LOGO_URL = '/pine-acres-logo.png';
-
-export const CABIN_MODE_LOGO_URL = '/cabin-mode-logo.png';
-
-export const CONTACT = {
-  phone: '214-430-3956',
-  name: 'Douglas Rice',
-  email: 'doug@hibernationhollowcabins.com',
-  instagram: 'https://www.instagram.com/pineacresglamping/',
-  facebook: 'https://www.facebook.com/pineacresglamping/',
-  website: 'https://www.pineacresglamping.com',
-  mailchimpUrl: 'https://mailchi.mp/hibernationhollowcabins/5lrqskfq6o',
-};
+export { 
+  PROPERTIES as CABINS,
+  LOGO_URL,
+  CABIN_MODE_LOGO_URL,
+  CONTACT,
+  COLORS,
+  IMAGES,
+  BRAND,
+  LOCATION,
+  type Property as Cabin,
+} from '../config/brand.config';

@@ -2,8 +2,7 @@ import React from 'react';
 import { Camera, Instagram, Facebook, AtSign } from 'lucide-react';
 import BackButton from '../components/BackButton';
 import Card from '../components/Card';
-import { COLORS } from '../styles/theme';
-import { CONTACT } from '../data/cabins';
+import { COLORS, CONTACT, BRAND } from '../config/brand.config';
 import './Connect.css';
 
 export default function Connect() {
@@ -42,13 +41,13 @@ export default function Connect() {
         <div className="tag-box">
           <AtSign size={24} color={COLORS.secondary} />
           <p className="tag-text">Tag your stay</p>
-          <p className="handle-text">@PineAcresGlamping</p>
+          <p className="handle-text">{CONTACT.instagramHandle}</p>
         </div>
 
         <div className="hashtag-container">
           <p className="hashtag-title">Popular Hashtags</p>
           <div className="hashtags">
-            <span>#PineAcresGlamping</span>
+            <span>#{BRAND.shortName.replace(/\s+/g, '')}</span>
             <span>#BrokenBowGlamping</span>
             <span>#GlampingOklahoma</span>
           </div>
