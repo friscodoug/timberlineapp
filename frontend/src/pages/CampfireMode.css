@@ -1,4 +1,4 @@
-/* Campfire Mode Styles */
+/* Campfire Mode Styles - Light Theme (Pine Acres) */
 
 .header-center {
   display: flex;
@@ -9,7 +9,7 @@
 
 .header-subtext {
   font-size: 16px;
-  color: #2B2B2B;
+  color: #64748b;
   margin-top: 8px;
   text-align: center;
 }
@@ -193,7 +193,7 @@
   padding: 0;
 }
 
-/* Story Modal */
+/* Story Modal - Light Theme */
 .story-modal {
   background: #F5F3EF;
   width: 100%;
@@ -203,6 +203,10 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+
+.story-modal.dark-modal {
+  background: #F5F3EF;
 }
 
 .story-modal-header {
@@ -241,18 +245,18 @@
   text-align: center;
 }
 
-/* Audio Controls */
+/* Audio Controls - Light Theme */
 .audio-controls {
   background: white;
   padding: 16px;
   border-radius: 12px;
   margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .audio-buttons {
   display: flex;
   gap: 10px;
-  margin-bottom: 12px;
 }
 
 .audio-btn {
@@ -297,32 +301,34 @@
   background: #b91c1c;
 }
 
-/* Voice Picker */
-.voice-picker {
+/* Audio Progress Bar */
+.audio-progress {
+  margin-top: 16px;
+}
+
+.progress-bar {
+  height: 6px;
+  background: #E8E6E2;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #2F4F3E;
+  border-radius: 3px;
+  transition: width 0.1s linear;
+}
+
+.time-display {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  padding-top: 12px;
-  border-top: 1px solid #E8E6E2;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #64748b;
 }
 
-.voice-select {
-  flex: 1;
-  padding: 8px 12px;
-  border: 1px solid #E8E6E2;
-  border-radius: 6px;
-  background: #F5F3EF;
-  font-size: 13px;
-  color: #2B2B2B;
-  cursor: pointer;
-}
-
-.voice-select:focus {
-  outline: none;
-  border-color: #2F4F3E;
-}
-
-/* Story Content */
+/* Story Content - Light Theme */
 .story-content {
   background: white;
   padding: 20px;
@@ -345,10 +351,6 @@
   .tab-btn {
     font-size: 13px;
     padding: 10px 8px;
-  }
-  
-  .tab-btn span {
-    display: none;
   }
   
   .category-tab {

@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { Flame, Users, BookOpen, ChevronDown, ChevronUp, X, Play, Pause, Square, Volume2 } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Flame, Users, BookOpen, ChevronDown, ChevronUp, X, Play, Pause, Square } from 'lucide-react';
 import BackButton from '../components/BackButton';
 import Card from '../components/Card';
 import { COLORS } from '../config/brand.config';
@@ -9,84 +9,121 @@ import './CampfireMode.css';
 type TabType = 'games' | 'stories';
 type StoryCategory = 'family' | 'scary' | 'local';
 
+// Map story IDs to audio file paths
+const AUDIO_FILES: Record<string, string> = {
+  'f1': '/audio/f1.mp3',
+  'f2': '/audio/f2.mp3',
+  'f3': '/audio/f3.mp3',
+  's1': '/audio/s1.mp3',
+  's2': '/audio/s2.mp3',
+  's3': '/audio/s3.mp3',
+  'l1': '/audio/l1.mp3',
+  'l2': '/audio/l2.mp3',
+  'l3': '/audio/l3.mp3',
+};
+
 export default function CampfireMode() {
   const [activeTab, setActiveTab] = useState<TabType>('games');
   const [expandedGame, setExpandedGame] = useState<string | null>(null);
   const [storyCategory, setStoryCategory] = useState<StoryCategory>('family');
   const [selectedStory, setSelectedStory] = useState<Story | null>(null);
   
-  // Speech synthesis state
-  const [isSpeaking, setIsSpeaking] = useState(false);
+  // Audio player state
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
-  const [selectedVoice, setSelectedVoice] = useState<string>('');
-  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Load voices
-  React.useEffect(() => {
-    const loadVoices = () => {
-      const availableVoices = speechSynthesis.getVoices();
-      setVoices(availableVoices);
-      if (availableVoices.length > 0 && !selectedVoice) {
-        // Prefer English voices
-        const englishVoice = availableVoices.find(v => v.lang.startsWith('en'));
-        setSelectedVoice(englishVoice?.name || availableVoices[0].name);
-      }
-    };
-    
-    loadVoices();
-    speechSynthesis.onvoiceschanged = loadVoices;
-    
+  // Clean up audio on unmount
+  useEffect(() => {
     return () => {
-      speechSynthesis.cancel();
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
     };
   }, []);
 
   const handleListen = () => {
     if (!selectedStory) return;
     
-    speechSynthesis.cancel();
-    
-    const utterance = new SpeechSynthesisUtterance(selectedStory.content);
-    const voice = voices.find(v => v.name === selectedVoice);
-    if (voice) utterance.voice = voice;
-    utterance.rate = 0.9;
-    utterance.pitch = 1;
-    
-    utterance.onend = () => {
-      setIsSpeaking(false);
+    const audioUrl = AUDIO_FILES[selectedStory.id];
+    if (!audioUrl) {
+      console.error('No audio file for story:', selectedStory.id);
+      return;
+    }
+
+    // Stop any existing audio
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
+
+    // Create new audio element
+    const audio = new Audio(audioUrl);
+    audioRef.current = audio;
+
+    audio.addEventListener('loadedmetadata', () => {
+      setDuration(audio.duration);
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      setCurrentTime(audio.currentTime);
+    });
+
+    audio.addEventListener('ended', () => {
+      setIsPlaying(false);
       setIsPaused(false);
-    };
-    
-    utteranceRef.current = utterance;
-    speechSynthesis.speak(utterance);
-    setIsSpeaking(true);
-    setIsPaused(false);
+      setCurrentTime(0);
+    });
+
+    audio.addEventListener('error', (e) => {
+      console.error('Audio error:', e);
+      setIsPlaying(false);
+      setIsPaused(false);
+    });
+
+    audio.play().then(() => {
+      setIsPlaying(true);
+      setIsPaused(false);
+    }).catch(err => {
+      console.error('Failed to play audio:', err);
+    });
   };
 
   const handlePause = () => {
-    if (speechSynthesis.speaking && !speechSynthesis.paused) {
-      speechSynthesis.pause();
+    if (audioRef.current && isPlaying && !isPaused) {
+      audioRef.current.pause();
       setIsPaused(true);
     }
   };
 
   const handleResume = () => {
-    if (speechSynthesis.paused) {
-      speechSynthesis.resume();
+    if (audioRef.current && isPaused) {
+      audioRef.current.play();
       setIsPaused(false);
     }
   };
 
   const handleStop = () => {
-    speechSynthesis.cancel();
-    setIsSpeaking(false);
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+    setIsPlaying(false);
     setIsPaused(false);
+    setCurrentTime(0);
   };
 
   const closeStoryModal = () => {
     handleStop();
     setSelectedStory(null);
+  };
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
   const filteredStories = CAMPFIRE_STORIES.filter(s => s.category === storyCategory);
@@ -104,7 +141,7 @@ export default function CampfireMode() {
       <BackButton />
 
       <div className="header-center">
-        <Flame size={48} color="#C25E2D" />
+        <Flame size={48} color={COLORS.campfireOrange} />
         <h1 className="page-title center">Campfire Mode</h1>
         <p className="header-subtext">Games and stories for the whole family</p>
       </div>
@@ -141,9 +178,9 @@ export default function CampfireMode() {
                   <span className="game-players">{game.players}</span>
                 </div>
                 {expandedGame === game.id ? (
-                  <ChevronUp size={24} color={COLORS.primary} />
+                  <ChevronUp size={24} color={COLORS.secondary} />
                 ) : (
-                  <ChevronDown size={24} color={COLORS.lightGray} />
+                  <ChevronDown size={24} color={COLORS.textLight} />
                 )}
               </button>
               
@@ -203,7 +240,7 @@ export default function CampfireMode() {
           <div className="story-modal" onClick={e => e.stopPropagation()}>
             <div className="story-modal-header">
               <button onClick={closeStoryModal}>
-                <X size={28} color={COLORS.text} />
+                <X size={28} color={COLORS.primary} />
               </button>
               <span>{getCategoryLabel(selectedStory.category)}</span>
               <div style={{ width: 28 }}></div>
@@ -215,7 +252,7 @@ export default function CampfireMode() {
               {/* Audio Controls */}
               <div className="audio-controls">
                 <div className="audio-buttons">
-                  {!isSpeaking ? (
+                  {!isPlaying ? (
                     <button className="audio-btn listen" onClick={handleListen}>
                       <Play size={18} />
                       <span>Listen</span>
@@ -231,7 +268,7 @@ export default function CampfireMode() {
                       <span>Pause</span>
                     </button>
                   )}
-                  {isSpeaking && (
+                  {isPlaying && (
                     <button className="audio-btn stop" onClick={handleStop}>
                       <Square size={18} />
                       <span>Stop</span>
@@ -239,20 +276,19 @@ export default function CampfireMode() {
                   )}
                 </div>
                 
-                {voices.length > 0 && (
-                  <div className="voice-picker">
-                    <Volume2 size={16} color={COLORS.lightGray} />
-                    <select 
-                      value={selectedVoice} 
-                      onChange={(e) => setSelectedVoice(e.target.value)}
-                      className="voice-select"
-                    >
-                      {voices.map((voice) => (
-                        <option key={voice.name} value={voice.name}>
-                          {voice.name}
-                        </option>
-                      ))}
-                    </select>
+                {/* Progress bar */}
+                {isPlaying && (
+                  <div className="audio-progress">
+                    <div className="progress-bar">
+                      <div 
+                        className="progress-fill" 
+                        style={{ width: duration > 0 ? `${(currentTime / duration) * 100}%` : '0%' }}
+                      />
+                    </div>
+                    <div className="time-display">
+                      <span>{formatTime(currentTime)}</span>
+                      <span>{formatTime(duration)}</span>
+                    </div>
                   </div>
                 )}
               </div>
