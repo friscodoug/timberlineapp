@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import Guidebook from './pages/Guidebook';
 import CabinMode from './pages/CabinMode';
 import CampfireMode from './pages/CampfireMode';
+import CabinSoundtrack from './pages/CabinSoundtrack';
 import ComeBack from './pages/ComeBack';
 import Newsletter from './pages/Newsletter';
 import Connect from './pages/Connect';
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/guidebook" element={<Guidebook />} />
           <Route path="/cabin-mode" element={<CabinMode />} />
           <Route path="/campfire-mode" element={<CampfireMode />} />
+          <Route path="/cabin-soundtrack" element={<CabinSoundtrack />} />
           <Route path="/come-back" element={<ComeBack />} />
           <Route path="/newsletter" element={<Newsletter />} />
           <Route path="/connect" element={<Connect />} />
