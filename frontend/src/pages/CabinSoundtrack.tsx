@@ -15,7 +15,7 @@ const PLAYLISTS: Playlist[] = [
   { id: '0SoebiGmbbLRR1rv3RKIIg', title: 'Red Dirt Roads', vibe: 'Oklahoma and Texas red dirt country', emoji: '🛻' },
   { id: '6iltGyKZJXzPVPYYIvKW09', title: 'Front Porch Folk', vibe: 'Acoustic folk for morning coffee on the deck', emoji: '☕' },
   { id: '7oefNEyjIJTjkDjWbwYKVX', title: 'Bluegrass Breakdown', vibe: 'Banjo and fiddle for cooking and card games', emoji: '🪕' },
-  { id: '1RvfJvGsGyG0bsceADGZgy', title: 'Hot Tub Classic Rock', vibe: '70s and 80s rock under the stars', emoji: '🌌' },
+  { id: '1RvfJvGsGyG0bsceADGZgy', title: 'Hot Tub Classic Rock', vibe: '70s and 80s rock under the stars', emoji: '♨️' },
   { id: '2ufjix45kDhoeQPzoMPOUo', title: 'Yacht Rock', vibe: 'Smooth soft rock to kick back to', emoji: '⛵' },
   { id: '7sL8QoTd6H9B393rTWGj7R', title: '80s Hits', vibe: 'Big 80s singalongs', emoji: '📼' },
   { id: '5jZEZGSZ40dnQFJKTEf21P', title: 'Throwback Road Trip', vibe: '90s and 2000s hits for the drive and game night', emoji: '🚗' },
