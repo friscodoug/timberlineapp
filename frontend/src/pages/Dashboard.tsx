@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Book, Leaf, Gift, Mail, Share2, HelpCircle, ChevronRight, RefreshCw, CloudSun, Building2, Flame } from 'lucide-react';
+import { Book, Leaf, Gift, Mail, Share2, HelpCircle, ChevronRight, RefreshCw, CloudSun, Building2, Flame, Music } from 'lucide-react';
 import Card from '../components/Card';
 import { COLORS, IMAGES, CONTACT, LOCATION } from '../config/brand.config';
 import { useCabin } from '../context/CabinContext';
@@ -21,6 +21,7 @@ const MENU_ITEMS: MenuItem[] = [
   { id: '2', title: 'Weather', subtitle: `5-day forecast for ${LOCATION.cityName}`, icon: CloudSun, route: '/weather', color: COLORS.weatherBlue },
   { id: '3', title: 'Cabin Mode', subtitle: 'Disconnect from technology and enjoy nature', imageIcon: IMAGES.cabinModeLogo, route: '/cabin-mode', color: COLORS.cabinModeGreen },
   { id: '4', title: 'Campfire Mode', subtitle: 'Games and stories for the whole family', icon: Flame, route: '/campfire-mode', color: COLORS.campfireOrange },
+  { id: '4b', title: 'Cabin Soundtrack', subtitle: 'Playlists for every moment of your stay', icon: Music, route: '/cabin-soundtrack', color: '#1DB954' },
   { id: '5', title: 'Come Back & Save', subtitle: "Who doesn't LOVE discounts?", icon: Gift, route: '/come-back', color: COLORS.secondary },
   { id: '6', title: 'Our Other Properties', subtitle: 'Explore more unique stays', icon: Building2, route: '/other-properties', color: '#6B5B95' },
   { id: '7', title: `Join ${CONTACT.newsletterName}`, subtitle: 'Our monthly newsletter', icon: Mail, route: '/newsletter', color: '#5B8A72' },
