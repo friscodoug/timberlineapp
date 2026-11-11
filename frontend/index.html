@@ -16,6 +16,8 @@
     <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
     <script defer src="/_vercel/insights/script.js" data-disable-auto-track="1"></script>
     <script src="/track.js"></script>
+    <!-- Offline support: saves the app on the phone so it opens with no cell signal (see /sw.js). -->
+    <script>if ('serviceWorker' in navigator) window.addEventListener('load', function () { navigator.serviceWorker.register('/sw.js').catch(function () {}); });</script>
   </head>
   <body>
     <div id="root"></div>
